@@ -1,0 +1,3 @@
+
+
+export const GOLF_API_FETCHED = "GOLF_API_FETCHED" 
