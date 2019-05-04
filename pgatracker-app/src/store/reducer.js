@@ -4,6 +4,11 @@ import * as actionTypes from './actions/actionTypes'
 const initialState = {
     golfScores: [],
     players: [],
+    schedule: [],
+    isFinished:false,
+    isStarted:false,
+    roundState:"",
+    tourId:0,
     test:22
   }
   
@@ -14,12 +19,18 @@ const initialState = {
         return {
           ...state,
           golfScores: action.golf,
-          players:action.players
+          players:action.players,
+          isFinished:action.isFinished,
+          isStarted:action.isStarted,
+          roundState:action.roundState,
+          tourId:action.tourId
+          
+          
         }
-      case 'POST_FETCHED':
+      case actionTypes.GOLF_SCHEDULE_FETCHED:
         return {
           ...state,
-          posts: action.posts
+          schedule: action.schedule
         }
     }
   

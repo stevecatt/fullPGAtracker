@@ -17,10 +17,24 @@ export const golfFetched = () => {
                 fetch(url)
               .then(response => response.json())
               .then(json => {
-             console.log(json.leaderboard.players)
-            dispatch({type:actionTypes.GOLF_API_FETCHED , golf: json.leaderboard, players :json.leaderboard.players})
+             console.log(json)
+            dispatch({type:actionTypes.GOLF_API_FETCHED , golf: json.leaderboard, players :json.leaderboard.players, isStarted:json.leaderboard.is_started,isFinished:json.leaderboard.is_finished,roundState:json.leaderboard.round_state, tourId:json.leaderboard.tournament_id })
      
     })
   })
   }
 }
+
+export const scheduleFetched =() =>{
+  //gets the annual schedule
+  return dispatch =>{
+    fetch ('https://statdata.pgatour.com/r/current/schedule-v2.json')
+    .then(response => response.json())
+    .then((shed)=> {
+      console.log(shed)
+      dispatch({type:actionTypes.GOLF_SCHEDULE_FETCHED , schedule: shed})
+    })
+  }
+}
+
+//https://www.pgatour.com/bin/data/feeds/weather.json/r480 weather stuff
