@@ -10,6 +10,7 @@ import thunk from 'redux-thunk'
 import ReactTable from 'react-table'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import 'react-table/react-table.css'
+import axios from 'axios'
 
 // composeEnhancers is only for debugging purposes 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
