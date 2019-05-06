@@ -49,7 +49,7 @@ class Golf extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      //postList: state.posts.filter(p => p.userId == 1)
+      
       golfScores: state.golfScores,
       leaderboard: state.golfscores,
       players:state.players,

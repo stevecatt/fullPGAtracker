@@ -1,24 +1,23 @@
 import * as actionTypes from './actionTypes'
+import axios from 'axios'
 
 
 export const golfFetched = () => {
 
   //finds the current tour code then inputs the tour id into leaderboard to get current scores 
   return dispatch => {
-    fetch('https://statdata.pgatour.com/r/current/message.json')
-    .then(resp=> resp.json())
-    .then(j => {
-      console.log (j.tid)
-      let tourId=j.tid
+    axios.get('https://statdata.pgatour.com/r/current/message.json')
+    .then(resp=> {
+      //console.log (resp.data.tid)
+      let tourId=resp.data.tid
       let url = "https://statdata.pgatour.com/r/"+tourId+"/leaderboard-v2mini.json"
       
      
 
-                fetch(url)
-              .then(response => response.json())
+                axios.get(url)
               .then(json => {
-             console.log(json)
-            dispatch({type:actionTypes.GOLF_API_FETCHED , golf: json.leaderboard, players :json.leaderboard.players, isStarted:json.leaderboard.is_started,isFinished:json.leaderboard.is_finished,roundState:json.leaderboard.round_state, tourId:json.leaderboard.tournament_id })
+             console.log(json.data.leaderboard)
+            dispatch({type:actionTypes.GOLF_API_FETCHED , golf: json.data.leaderboard, players :json.data.leaderboard.players, isStarted:json.data.leaderboard.is_started,isFinished:json.data.leaderboard.is_finished,roundState:json.data.leaderboard.round_state, tourId:json.data.leaderboard.tournament_id })
      
     })
   })

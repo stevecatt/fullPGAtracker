@@ -5,6 +5,9 @@ import Golf from './components/Golfscores'
 import Weather from './components/Weather'
 
 import Tabletest from './components/Tabletest'
+import Login from './components/Login'
+import Register from './components/Register'
+
 
 class App extends Component {
 
@@ -13,6 +16,8 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Register/>
+        <Login/>
         <Golf/>
         <Tabletest />
        

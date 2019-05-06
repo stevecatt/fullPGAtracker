@@ -13,6 +13,10 @@ class Tabletest extends Component {
     console.log(this.props.players)
 
     const columns = [
+      {Header :"Image",
+      accessor: "img src= 'https://pga-tour-res.cloudinary.com/image/upload/b_rgb:cecece,c_fill,d_headshots_default.png,f_jpg,g_face:center,h_65,q_auto,w_65/headshots_29484.png'"
+
+      },
         {
         Header:'Position',
         accessor: 'current_position'
@@ -25,7 +29,21 @@ class Tabletest extends Component {
       {
         Header: 'Last Name',
         accessor: 'player_bio.last_name'
-      }]
+      },
+      {
+        Header:'Today',
+        accessor:'today'
+      },
+      {
+        Header:'Through',
+        accessor:'thru'
+      },
+      {
+        Header: 'Total',
+        accessor: 'total'
+      },
+      
+    ]
   
 
     return (
@@ -34,7 +52,7 @@ class Tabletest extends Component {
                 data={data}
                 columns={columns}
                 defaultPageSize = {10}
-                pageSizeOptions = {[10, 20, 30]}
+                pageSizeOptions = {[10, 20, 50]}
               />
           </div>      
     )
