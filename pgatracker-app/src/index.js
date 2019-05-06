@@ -9,6 +9,7 @@ import reducer from './store/reducer'
 import thunk from 'redux-thunk'
 import ReactTable from 'react-table'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import 'react-table/react-table.css'
 
 // composeEnhancers is only for debugging purposes 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

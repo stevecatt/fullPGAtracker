@@ -28,6 +28,7 @@ class Golf extends Component {
             <div>
             <h1>{this.props.golfScores.tour_name}</h1>
             <h2>{this.props.golfScores.tournament_name}</h2>
+            <h3>{this.props.golfScores.round_state}</h3>
            
           
 

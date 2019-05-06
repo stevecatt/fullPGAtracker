@@ -4,13 +4,19 @@ import './App.css';
 import Golf from './components/Golfscores'
 import Weather from './components/Weather'
 
+import Tabletest from './components/Tabletest'
+
 class App extends Component {
+
+  
 
   render() {
     return (
       <div>
-        <Golf />
-        <Weather/>
+        <Golf/>
+        <Tabletest />
+       
+      
        
       </div>
     )
