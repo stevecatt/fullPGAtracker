@@ -9,7 +9,8 @@ const initialState = {
     isStarted:false,
     roundState:"",
     tourId:0,
-    test:22
+    test:22,
+    isAuthenticated:false
   }
   
   const reducer = (state = initialState, action) => {
@@ -32,6 +33,12 @@ const initialState = {
           ...state,
           schedule: action.schedule
         }
+        case actionTypes.IS_AUTHENITCATED:
+        return{
+          ...state,
+          isAuthenticated: true
+        }
+
     }
   
     return state

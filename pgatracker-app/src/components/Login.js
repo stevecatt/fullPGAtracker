@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { setAuthenticationHeader } from '../utils/authenticate'
+import * as actionTypes from '../store/actions/actionTypes'
 
 
 
@@ -44,7 +45,7 @@ class Login extends Component {
           let token = response.data.token
 
           localStorage.setItem('jwtoken',token)
-          this.props.history.push('/view-all-books')
+          //this.props.history.push('/view-all-books')
           this.props.onTokenRecieved(token)
           setAuthenticationHeader(token)
           }else{console.log("you messed up")}
@@ -82,7 +83,7 @@ class Login extends Component {
 }
 const mapDispatchToProps = (dispatch)=>{
   return {
-    onTokenRecieved: (token)=> dispatch({type:'IS_AUTHENTICATED'})
+    onTokenRecieved: (token)=> dispatch({type:actionTypes.IS_AUTHENITCATED})
   }
 }
 
