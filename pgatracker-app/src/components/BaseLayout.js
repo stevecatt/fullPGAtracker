@@ -9,7 +9,11 @@ import { Fragment } from 'react';
 class Menu extends Component {
     render(){
         return(
-            <div></div>
+            <div>
+              <NavLink className="font-weight-bold topbar" to="/login"> login </NavLink>
+              <NavLink className="font-weight-bold topbar" to="/register"> Register</NavLink>
+              <NavLink className="font-weight-bold topbar" to="/logout"> logout </NavLink>
+            </div>
         )
     }
 }
@@ -30,7 +34,7 @@ class Footer extends Component {
     render() {
       return (
         <div>
-          <Menu isAuth = {this.props.isAuth} isReq = {this.props.isReg}/>
+          <Menu isAuth = {this.props.isAuth}/>
             {this.props.children}
           <Footer/>
         </div>
