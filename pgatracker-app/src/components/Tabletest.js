@@ -24,8 +24,17 @@ class Tabletest extends Component {
     })
   }
   
+  
 
 
+  customFilter = (filter, row) => {
+    const id = filter.pivotId || filter.id;
+    if (row[id] !== null && typeof row[id] === "string") {
+      return (row[id] !== undefined
+        ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
+        : true);
+    }
+  }
   
   render() {
     const data = this.props.players
@@ -104,6 +113,7 @@ class Tabletest extends Component {
                 pageSizeOptions = {[10, 20, 50]}
                 showPaginationTop
                 showPaginationBottom = {false}
+                defaultFilterMethod={this.customFilter}
               />
           </div>      
     )
