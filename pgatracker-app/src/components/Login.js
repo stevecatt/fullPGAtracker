@@ -83,7 +83,7 @@ class Login extends Component {
 }
 const mapDispatchToProps = (dispatch)=>{
   return {
-    onTokenRecieved: (token)=> dispatch({type:actionTypes.IS_AUTHENITCATED})
+    onTokenRecieved: (token)=> dispatch({type:actionTypes.IS_AUTHENITCATED, token: token})
   }
 }
 

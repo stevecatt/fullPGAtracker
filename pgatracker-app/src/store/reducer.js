@@ -36,7 +36,7 @@ const initialState = {
         case actionTypes.IS_AUTHENITCATED:
         return{
           ...state,
-          isAuthenticated: true
+          isAuthenticated: action.token != null ? true : false
         }
 
     }

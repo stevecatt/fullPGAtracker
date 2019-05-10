@@ -6,18 +6,20 @@ export const golfFetched = () => {
 
   //finds the current tour code then inputs the tour id into leaderboard to get current scores 
   return dispatch => {
-    axios.get('https://statdata.pgatour.com/r/current/message.json')
-    .then(resp=> {
+    fetch('https://statdata.pgatour.com/s/current/message.json')
+    .then(resp=> resp.json()) 
+    .then((json)=>{
       //console.log (resp.data.tid)
-      let tourId=resp.data.tid
-      let url = "https://statdata.pgatour.com/r/"+tourId+"/leaderboard-v2mini.json"
+      let tourId=json.tid
+      let url = "https://statdata.pgatour.com/s/"+tourId+"/leaderboard-v2mini.json"
       
      
 
-                axios.get(url)
-              .then(json => {
-             console.log(json.data.leaderboard)
-            dispatch({type:actionTypes.GOLF_API_FETCHED , golf: json.data.leaderboard, players :json.data.leaderboard.players, isStarted:json.data.leaderboard.is_started,isFinished:json.data.leaderboard.is_finished,roundState:json.data.leaderboard.round_state, tourId:json.data.leaderboard.tournament_id })
+              fetch(url)
+              .then(response => response.json())
+              .then((json)=>{
+             console.log(json.leaderboard)
+            dispatch({type:actionTypes.GOLF_API_FETCHED , golf: json.leaderboard, players :json.leaderboard.players, isStarted:json.leaderboard.is_started,isFinished:json.leaderboard.is_finished,roundState:json.leaderboard.round_state, tourId:json.leaderboard.tournament_id })
      
     })
   })

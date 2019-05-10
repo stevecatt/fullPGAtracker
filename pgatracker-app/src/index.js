@@ -22,9 +22,11 @@ const store = createStore(reducer,composeEnhancers(
     applyMiddleware(thunk)
   ));
 
+  setAuthenticationHeader(localStorage.getItem('jwtoken'))
+
 ReactDOM.render(
 
-<Provider store={store}>
+<Provider store={store}> 
   <BrowserRouter>
     <BaseLayout>
       <Switch>
