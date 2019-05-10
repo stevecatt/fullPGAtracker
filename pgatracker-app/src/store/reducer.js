@@ -11,7 +11,8 @@ const initialState = {
     tourId:0,
     test:22,
     isAuthenticated:false,
-    selectedTour:""
+    selectedTour:"",
+    uid:0
   }
   
   const reducer = (state = initialState, action) => {
@@ -25,7 +26,8 @@ const initialState = {
           isFinished:action.isFinished,
           isStarted:action.isStarted,
           roundState:action.roundState,
-          tourId:action.tourId
+          tourId:action.tourId,
+          
           
           
         }
@@ -37,7 +39,8 @@ const initialState = {
         case actionTypes.IS_AUTHENITCATED:
         return{
           ...state,
-          isAuthenticated: action.token != null ? true : false
+          isAuthenticated: action.token != null ? true : false,
+          uid:action.uid
         }
         case actionTypes.SELECTED_TOUR:
         return{

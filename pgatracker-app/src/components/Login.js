@@ -43,10 +43,11 @@ class Login extends Component {
           if (response.data != false){
           console.log(response)
           let token = response.data.token
+          let uid=response.data.uid
 
           localStorage.setItem('jwtoken',token)
-          //this.props.history.push('/view-all-books')
-          this.props.onTokenRecieved(token)
+
+          this.props.onTokenRecieved(token,uid)
           setAuthenticationHeader(token)
           this.props.history.push('/')
           }else{console.log("you messed up")}
@@ -84,7 +85,7 @@ class Login extends Component {
 }
 const mapDispatchToProps = (dispatch)=>{
   return {
-    onTokenRecieved: (token)=> dispatch({type:actionTypes.IS_AUTHENITCATED, token: token})
+    onTokenRecieved: (token,uid)=> dispatch({type:actionTypes.IS_AUTHENITCATED, token: token,uid:uid})
   }
 }
 

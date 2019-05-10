@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
+import axios from 'axios'
 
 
 
@@ -7,10 +8,24 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 
 class Tabletest extends Component {
+
+
+
 // use this to save the pid to database
-  saveFavourite(id){
+  saveFavourite= (id) => {
     console.log(id)
+    axios.post('http://localhost:8080/save-favorite',{
+      playerId : id,
+      userId: this.props.uid
+    
+    }).then(response =>{
+      //add a function to select the players from the api. hopefully
+      console.log(response)
+    })
   }
+  
+
+
   
   render() {
     const data = this.props.players
@@ -102,8 +117,9 @@ const mapStateToProps = (state) => {
       golfScores: state.golfScores,
       leaderboard: state.golfscores,
       players:state.players,
+      uid:state.uid,
      
-      test:state.test
+      
 
       
     }

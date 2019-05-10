@@ -87,6 +87,36 @@ console.log(userName,firstName,lastName,hash)
       }
     })
   })
+
+
+//getting saved golfer id's
+
+
+//posting saved golfer
+
+app.post('/save-favorite',authenticate,(req,res)=>{
+console.log(req.body.playerId)
+let user = parseInt(req.body.userId)
+let pgaId = parseInt(req.body.playerId)
+console.log(user,pgaId)
+
+db.one('INSERT INTO favorite_golfers (pga_id, user_id) VALUES($1,$2) RETURNING id', [pgaId, user])
+.then((success)=>{
+  console.log(success)
+  if(success){
+    console.log(success)
+    res.json({success: true,message:'weve added one'})
+  }
+  else {
+    res.json({error, message: 'need to be logged in '})
+  }
+}
+).catch((error)=>{
+  res.status(500).json({message:  'need to be logged in '})
+})
+
+})
+
  // logging in new user
 
  app.post ('/login',(req,res) => {
@@ -101,11 +131,12 @@ console.log(userName,firstName,lastName,hash)
       .then((logger)=>{
         bcrypt.compare(req.body.password, logger.hash, function(err, result){
           if (result){
+            console.log(logger)
             jwt.sign({ id:logger.id}, 'secret', function(err, token) {
-              console.log(token)
+              console.log(token,logger.id)
 
               if(token != false)  {
-                res.json({token: token})
+                res.json({token: token,uid:logger.id})
               } else {
                 res.json({message: 'Unable to generate token'})
               }
