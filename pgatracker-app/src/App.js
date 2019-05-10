@@ -16,8 +16,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Register/>
-        <Login/>
+        
         <Golf/>
         <Tabletest />
        

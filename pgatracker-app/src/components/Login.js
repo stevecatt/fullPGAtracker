@@ -48,6 +48,7 @@ class Login extends Component {
           //this.props.history.push('/view-all-books')
           this.props.onTokenRecieved(token)
           setAuthenticationHeader(token)
+          this.props.history.push('/')
           }else{console.log("you messed up")}
         })
         // .then(result => {

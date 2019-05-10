@@ -1,0 +1,6 @@
+
+
+<ul>{this.props.players.map((p)=> <li key = {p.player_id}><img src= {`https://pga-tour-res.cloudinary.com/image/upload/b_rgb:cecece,c_fill,d_headshots_default.png,f_jpg,g_face:center,h_65,q_auto,w_65/headshots_${p.player_id}.png`}/>
+            {p.current_position}__{p.player_bio.country}__{p.current_position}__{p.player_bio.first_name}__{p.player_bio.last_name}__{p.today}__{p.thru}__{p.total} 
+            </li>)}
+            </ul>

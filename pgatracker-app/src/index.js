@@ -15,7 +15,9 @@ import { setAuthenticationHeader } from './utils/authenticate'
 import BaseLayout from './components/BaseLayout'
 import Golf from './components/Golfscores'
 import Login from './components/Login'
+import Logout from './components/Logout'
 import Register from './components/Register'
+import 'bootstrap/dist/css/bootstrap.min.css'
 // composeEnhancers is only for debugging purposes 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,composeEnhancers(
@@ -34,6 +36,7 @@ ReactDOM.render(
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/golf" component={Golf} />
+        <Route path="/logout" component={Logout}/>
         <App />
       </Switch>
     </BaseLayout>

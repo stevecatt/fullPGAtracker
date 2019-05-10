@@ -1,30 +1,30 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 
+//needed to use this inside of golfscores app to get access to state.
+// export const golfFetched = () => {
 
-export const golfFetched = () => {
-
-  //finds the current tour code then inputs the tour id into leaderboard to get current scores 
-  return dispatch => {
-    fetch('https://statdata.pgatour.com/s/current/message.json')
-    .then(resp=> resp.json()) 
-    .then((json)=>{
-      //console.log (resp.data.tid)
-      let tourId=json.tid
-      let url = "https://statdata.pgatour.com/s/"+tourId+"/leaderboard-v2mini.json"
+//   //finds the current tour code then inputs the tour id into leaderboard to get current scores 
+//   return dispatch => {
+//     fetch('https://statdata.pgatour.com/m/current/message.json')
+//     .then(resp=> resp.json()) 
+//     .then((json)=>{
+//       //console.log (resp.data.tid)
+//       let tourId=json.tid
+//       let url = "https://statdata.pgatour.com/m/"+tourId+"/leaderboard-v2mini.json"
       
      
 
-              fetch(url)
-              .then(response => response.json())
-              .then((json)=>{
-             console.log(json.leaderboard)
-            dispatch({type:actionTypes.GOLF_API_FETCHED , golf: json.leaderboard, players :json.leaderboard.players, isStarted:json.leaderboard.is_started,isFinished:json.leaderboard.is_finished,roundState:json.leaderboard.round_state, tourId:json.leaderboard.tournament_id })
+//               fetch(url)
+//               .then(response => response.json())
+//               .then((json)=>{
+//              console.log(json.leaderboard)
+//             dispatch({type:actionTypes.GOLF_API_FETCHED , golf: json.leaderboard, players :json.leaderboard.players, isStarted:json.leaderboard.is_started,isFinished:json.leaderboard.is_finished,roundState:json.leaderboard.round_state, tourId:json.leaderboard.tournament_id })
      
-    })
-  })
-  }
-}
+//     })
+//   })
+//   }
+// }
 
 export const scheduleFetched =() =>{
   //gets the annual schedule

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Fragment } from 'react';
+import Selector from './Selector'
 
 
 
@@ -10,9 +11,10 @@ class Menu extends Component {
     render(){
         return(
             <div>
-              <NavLink className="font-weight-bold topbar" to="/login"> login </NavLink>
-              <NavLink className="font-weight-bold topbar" to="/register"> Register</NavLink>
-              <NavLink className="font-weight-bold topbar" to="/logout"> logout </NavLink>
+              {!this.props.isAuth ?<NavLink className="font-weight-bold topbar" to="/login"> login </NavLink>:null}
+              {!this.props.isAuth ?<NavLink className="font-weight-bold topbar" to="/register"> Register</NavLink>:null}
+              {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/logout"> logout </NavLink>:null}
+              
             </div>
         )
     }

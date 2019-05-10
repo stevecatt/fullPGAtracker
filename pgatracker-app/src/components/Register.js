@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
+import * as actionTypes from '../store/actions/actionTypes'
 
 class Register extends Component {
     constructor(){
@@ -49,6 +50,7 @@ class Register extends Component {
            
             //this.props.history.push('/login')
             this.props.onResultTrue()
+            this.props.history.push('/login')
           }else{
               console.log("error")
           }

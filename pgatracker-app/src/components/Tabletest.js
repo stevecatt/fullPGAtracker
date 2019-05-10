@@ -7,40 +7,74 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 
 class Tabletest extends Component {
+// use this to save the pid to database
+  saveFavourite(id){
+    console.log(id)
+  }
   
   render() {
     const data = this.props.players
     console.log(this.props.players)
 
     const columns = [
-      {Header :"Image",
-      accessor: "img src= 'https://pga-tour-res.cloudinary.com/image/upload/b_rgb:cecece,c_fill,d_headshots_default.png,f_jpg,g_face:center,h_65,q_auto,w_65/headshots_29484.png'"
+      
+      {Header: 'Actions',
+      Cell: props =>{
+        return(
+          <button className ="saveButton" onClick={()=>
+          this.saveFavourite(props.original.player_id)}>Save</button>
+        )
+      }
+    },
 
+
+      {Header :"Image",
+      Cell: props =>{
+        return (
+        <img src= {`https://pga-tour-res.cloudinary.com/image/upload/b_rgb:cecece,c_fill,d_headshots_default.png,f_jpg,g_face:center,h_65,q_auto,w_65/headshots_${props.original.player_id}.png`}/>
+        )
+      }
       },
         {
         Header:'Position',
-        accessor: 'current_position'
+        accessor: 'current_position',
+        style:{
+          textAlign:"center"
+        }
 
     },
         {
         Header: 'First Name',
-        accessor: 'player_bio.first_name'
+        accessor: 'player_bio.first_name',
+        filterable: true
       },
       {
         Header: 'Last Name',
-        accessor: 'player_bio.last_name'
+        accessor: 'player_bio.last_name',
+        filterable: true
       },
       {
         Header:'Today',
-        accessor:'today'
+        accessor:'today',
+        soratble: false,
+        style:{
+          textAlign:"center"
+        }
+       
       },
       {
         Header:'Through',
-        accessor:'thru'
+        accessor:'thru',
+        style:{
+          textAlign:"center"
+        }
       },
       {
         Header: 'Total',
-        accessor: 'total'
+        accessor: 'total',
+        style:{
+          textAlign:"center"
+        }
       },
       
     ]
@@ -53,6 +87,8 @@ class Tabletest extends Component {
                 columns={columns}
                 defaultPageSize = {10}
                 pageSizeOptions = {[10, 20, 50]}
+                showPaginationTop
+                showPaginationBottom = {false}
               />
           </div>      
     )
