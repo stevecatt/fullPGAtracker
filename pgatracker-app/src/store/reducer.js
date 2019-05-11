@@ -12,7 +12,8 @@ const initialState = {
     test:22,
     isAuthenticated:false,
     selectedTour:"",
-    uid:0
+    uid:0,
+    favorites:[]
   }
   
   const reducer = (state = initialState, action) => {
@@ -51,10 +52,12 @@ const initialState = {
         return{
           ...state,
           isAuthenticated: false
-
-
         }
-
+        case actionTypes.FAV_SELECTED:
+        return{
+          ...state,
+          favorites:action.favorites
+        }
     }
   
     return state

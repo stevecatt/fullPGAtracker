@@ -19,6 +19,8 @@ import Logout from './components/Logout'
 import Register from './components/Register'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Tabletest from './components/Tabletest';
+import Userpage from './components/Userpage'
+import requireAuth from './components/requireAuth'
 // composeEnhancers is only for debugging purposes 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,composeEnhancers(
@@ -38,6 +40,7 @@ ReactDOM.render(
         <Route path="/login" component={Login} />
         <Route path="/golf" component={Golf} />
         <Route path="/logout" component={Logout}/>
+        <Route path="/userpage" component = {requireAuth(Userpage)}/>
        
         <App />
       </Switch>

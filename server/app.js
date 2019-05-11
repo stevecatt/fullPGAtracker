@@ -90,6 +90,34 @@ console.log(userName,firstName,lastName,hash)
 
 
 //getting saved golfer id's
+app.post('/get-favorites',authenticate,(req,res)=>{
+  let user=req.body.uid
+  db.any('SELECT pga_id FROM favorite_golfers WHERE user_id =$1',[user])
+  .then((favorites)=>{
+    res.json({favorites})
+  })
+  console.log(user)
+  //res.json({user})
+
+})
+//removing favorite golfer
+
+app.post('/remove-favorite',authenticate,(req,res)=>{
+let user = req.body.userId
+let pgaId = parseInt(req.body.playerId)
+console.log(user,pgaId)
+
+db.one('DELETE FROM favorite_golfers WHERE pga_id = $1 AND user_id = $2 RETURNING id',[pgaId,user])
+.then((deleted)=>{
+  if (deleted){
+    console.log(deleted)
+    res.json({message:"removed"})
+  }
+  
+
+})
+
+})
 
 
 //posting saved golfer
