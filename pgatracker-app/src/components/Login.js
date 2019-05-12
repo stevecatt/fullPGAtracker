@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { setAuthenticationHeader } from '../utils/authenticate'
 import * as actionTypes from '../store/actions/actionTypes'
-
+import * as urls from '../utils/urls'
 
 
 class Login extends Component {
@@ -30,7 +30,7 @@ class Login extends Component {
       }
 
       handleSaveUserClick = () => {
-      axios.post('https://scorestracker.herokuapp.com/login', {
+      axios.post(urls.login, {
        
           
            

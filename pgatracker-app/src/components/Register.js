@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import * as actionTypes from '../store/actions/actionTypes'
+import * as urls from '../utils/urls'
 
 class Register extends Component {
     constructor(){
@@ -31,7 +32,7 @@ class Register extends Component {
   
     
   
-        axios.post('https://scorestracker.herokuapp.com/register', {
+        axios.post(urls.register, {
      
           firstName: this.state.firstName,
           lastName: this.state.lastName,

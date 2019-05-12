@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Select from 'react-select'
 import * as actionCreators from '../store/actions/actionCreators'
 import * as actionTypes from '../store/actions/actionTypes'
+import * as urls from '../utils/urls'
 import '../App.css';
 import axios from "axios"
 
@@ -30,7 +31,7 @@ class Golf extends Component {
 
   getUserFavorites =()=>{
     let favorites =[]
-    axios.post('https://scorestracker.herokuapp.com/get-favorites',{
+    axios.post(urls.getFavorites,{
         uid:this.props.uid
     })
     .then(response =>{

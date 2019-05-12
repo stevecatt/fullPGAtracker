@@ -8,6 +8,7 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Tabletest from './Tabletest';
 import Golf from './Golfscores';
+import * as urls from '../utils/urls';
 
 class FaveTable extends Component {
   constructor(){
@@ -21,7 +22,7 @@ class FaveTable extends Component {
 
   getUserFavorites =()=>{
     let favorites =[]
-    axios.post('https://scorestracker.herokuapp.com/get-favorites',{
+    axios.post(urls.getFavorites,{
         uid:this.props.uid
     })
     .then(response =>{
@@ -30,7 +31,7 @@ class FaveTable extends Component {
         let ids = response.data.favorites
         let i=0
         for(i=0;i<ids.length;i++){
-            console.log(ids[i].pga_id)
+           // console.log(ids[i].pga_id)
             
             
             let favoritepush= this.props.players.filter(player=>player.player_id == ids[i].pga_id)
@@ -39,7 +40,7 @@ class FaveTable extends Component {
 
             }
            
-            console.log(favoritepush)
+            //console.log(favoritepush)
             
             
 
@@ -61,7 +62,7 @@ class FaveTable extends Component {
 //use this to remove the pid to database
   removeFavourite= (id) => {
     console.log(id,this.props.uid)
-    axios.post('https://scorestracker.herokuapp.com/remove-favorite',{
+    axios.post(urls.removeFavorite ,{
       playerId : id,
       userId: this.props.uid
 

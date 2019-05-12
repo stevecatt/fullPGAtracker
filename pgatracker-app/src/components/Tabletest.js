@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import * as actionTypes from '../store/actions/actionTypes'
+import * as urls from '../utils/urls'
 
 
 import ReactTable from "react-table";
@@ -19,7 +20,7 @@ class Tabletest extends Component {
 
   getUserFavorites =()=>{
     let favorites =[]
-    axios.post('https://scorestracker.herokuapp.com/get-favorites',{
+    axios.post(urls.getFavorites,{
         uid:this.props.uid
     })
     .then(response =>{
