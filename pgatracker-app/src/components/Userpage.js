@@ -54,7 +54,7 @@ getUserFavorites =()=>{
 
    
     })
-    console.log("this is outside",favorites)
+   // console.log("this is outside",favorites)
 }
 
 componentDidMount(){

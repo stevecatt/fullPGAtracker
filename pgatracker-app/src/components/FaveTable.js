@@ -18,8 +18,9 @@ class FaveTable extends Component {
       playerId : id,
       userId: this.props.uid
     
+    
     }).then(response =>{
-      //add a function to select the players from the api. hopefully
+     
       console.log(response)
     })
   }

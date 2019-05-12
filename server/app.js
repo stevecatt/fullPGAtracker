@@ -7,6 +7,8 @@ const saltRounds = 10
 const jwt = require('jsonwebtoken')
 
 const pgp = require('pg-promise')()
+const PORT = process.env.PORT || 8080
+
 app.use(cors())
 
 app.use(bodyParser.json())
@@ -55,6 +57,11 @@ function authenticate(req,res, next) {
 
 app.get('/', (req, res) => {
     res.send('hello')
+})
+
+
+app.get('/hello', (req,res) => {
+  res.send('heroku works')
 })
 
 
@@ -124,7 +131,7 @@ db.one('DELETE FROM favorite_golfers WHERE pga_id = $1 AND user_id = $2 RETURNIN
 
 app.post('/save-favorite',authenticate,(req,res)=>{
 console.log(req.body.playerId)
-let user = parseInt(req.body.userId)
+let user =req.body.userId
 let pgaId = parseInt(req.body.playerId)
 console.log(user,pgaId)
 
@@ -196,6 +203,6 @@ db.one('INSERT INTO favorite_golfers (pga_id, user_id) VALUES($1,$2) RETURNING i
     
   
   
-app.listen(8080,()=>{
+app.listen(PORT,()=>{
 console.log("At your service")
 })
