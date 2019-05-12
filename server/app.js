@@ -122,6 +122,8 @@ db.one('DELETE FROM favorite_golfers WHERE pga_id = $1 AND user_id = $2 RETURNIN
   }
   
 
+}).catch((error)=>{
+  res.status(500).json({message:  'something wrong '})
 })
 
 })

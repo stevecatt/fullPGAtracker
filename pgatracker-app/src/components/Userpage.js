@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import * as actionTypes from '../store/actions/actionTypes'
+//import { getUserFavorites } from '../utils/getDataFunctions'
 
 
 
@@ -22,7 +23,7 @@ class Userpage extends Component{
 
 getUserFavorites =()=>{
     let favorites =[]
-    axios.post('http://localhost:8080/get-favorites',{
+    axios.post('https://scorestracker.herokuapp.com/get-favorites',{
         uid:this.props.uid
     })
     .then(response =>{
@@ -58,27 +59,25 @@ getUserFavorites =()=>{
 }
 
 componentDidMount(){
+    // let favorites =[]
     this.getUserFavorites()
+    //this was testing to see if i could figure out remote function
+    // this.setState({
+    //                favorites:favorites
+        
+    //            })
+    //  this.props.onFavSelected(this.state.favorites)
    // this.props.onFavSelected(this.state.favorites)
 }
 
     render(){
 
-        let g=this.state.favorites.map((p)=>{
-            console.log("this is p",p[0].player_id)
-            return  <li key = {p[0].player_id}><img src= {`https://pga-tour-res.cloudinary.com/image/upload/b_rgb:cecece,c_fill,d_headshots_default.png,f_jpg,g_face:center,h_65,q_auto,w_65/headshots_${p[0].player_id}.png`}/>
-            {p[0].current_position}__{p[0].player_bio.country}__{p[0].current_position}__{p[0].player_bio.first_name}__{p[0].player_bio.last_name}__{p[0].today}__{p[0].thru}__{p[0].total} 
-           </li>
-               
-           
-        })
-        console.log("this is g",g)
-
+        
 
 
         return(
-            <div><h1>Favorites</h1>
-            <ul>{g}</ul>
+            <div><h1></h1>
+            
             
 
 

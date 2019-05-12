@@ -13,7 +13,13 @@ const initialState = {
     isAuthenticated:false,
     selectedTour:"",
     uid:0,
-    favorites:[]
+    favorites:[],
+    courses:[],
+    pgaTournaments:[],
+    seniorTournaments:[],
+    wedTournaments:[],
+    latinTournaments:[],
+    canadaTournaments:[]
   }
   
   const reducer = (state = initialState, action) => {
@@ -28,14 +34,19 @@ const initialState = {
           isStarted:action.isStarted,
           roundState:action.roundState,
           tourId:action.tourId,
-          
+          courses:action.courses
           
           
         }
       case actionTypes.GOLF_SCHEDULE_FETCHED:
         return {
           ...state,
-          schedule: action.schedule
+          schedule: action.schedule,
+          pgaTournaments:action.pga,
+          seniorTournaments:action.champ,
+          wedTournaments:action.wed,
+          latinTournaments:action.latino,
+          canadaTournaments:action.canada
         }
         case actionTypes.IS_AUTHENITCATED:
         return{

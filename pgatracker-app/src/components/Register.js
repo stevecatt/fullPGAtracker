@@ -31,7 +31,7 @@ class Register extends Component {
   
     
   
-        axios.post('http://localhost:8080/register', {
+        axios.post('https://scorestracker.herokuapp.com/register', {
      
           firstName: this.state.firstName,
           lastName: this.state.lastName,

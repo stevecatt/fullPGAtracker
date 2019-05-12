@@ -4,6 +4,7 @@ import Select from 'react-select'
 import * as actionCreators from '../store/actions/actionCreators'
 import * as actionTypes from '../store/actions/actionTypes'
 import '../App.css';
+import axios from "axios"
 
 
 const golfTours = [
@@ -20,11 +21,51 @@ class Golf extends Component {
     constructor(){
     super()
     this.state={
-      selectedOption: {label:"PGA TOUR",value:"r"}
+      selectedOption: {label:"PGA TOUR",value:"r"},
+      favorites:[]
 
 
     }
   }
+
+  getUserFavorites =()=>{
+    let favorites =[]
+    axios.post('https://scorestracker.herokuapp.com/get-favorites',{
+        uid:this.props.uid
+    })
+    .then(response =>{
+        console.log(response.data.favorites)
+       
+        let ids = response.data.favorites
+        let i=0
+        for(i=0;i<ids.length;i++){
+            console.log(ids[i].pga_id)
+            
+            
+            let favoritepush= this.props.players.filter(player=>player.player_id == ids[i].pga_id)
+            if (favoritepush.length > 0){
+                favorites.push(favoritepush)
+
+            }
+           
+            console.log(favoritepush)
+            
+            
+
+            
+        }
+       this.setState({
+           favorites:favorites
+
+       })
+       this.props.onFavSelected(this.state.favorites)
+
+   
+    }).then(()=>{
+      console.log("sent the favorites")
+    })
+   // console.log("this is outside",favorites)
+}
 
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
@@ -34,7 +75,18 @@ class Golf extends Component {
     this.props.onTourSelected(selectedOption.value)
     let tour = selectedOption.value
     this.golfFetched(tour)
+    this.getUserFavorites()
    //this.props.onSchedualFetched(selectedOption.value)
+  }
+
+  scheduleFetched = (tour) =>{
+    let url = 'https://statdata.pgatour.com/'+tour+'/current/schedule-v2.json'
+    fetch(url)
+    .then(schedule => schedule.json())
+    .then((sched)=>{
+      console.log("this is tour schedule",sched)
+
+    })
   }
 
 
@@ -42,7 +94,7 @@ class Golf extends Component {
 
     //finds the current tour code then inputs the tour id into leaderboard to get current scores 
     
-    console.log(this.state.selectedOption.value)
+    //console.log(this.state.selectedOption.value)
     let url = 'https://statdata.pgatour.com/'+tour+'/current/message.json'
 
       fetch (url)
@@ -62,11 +114,13 @@ class Golf extends Component {
   }
 
     componentDidMount() {
-      console.log(this.state.selectedOption.value)
+      //console.log(this.state.selectedOption.value)
       let tour = this.state.selectedOption.value
         this.golfFetched(tour)
-        //this.props.onGolfFetched()
-        //this.props.onSchedualFetched()
+        this.getUserFavorites()
+        
+        
+        this.props.onSchedualFetched()
         this.interval = setInterval(()=>{
           //gonna fire this when status of game is active 
          console.log("how do i set the interval")
@@ -82,6 +136,10 @@ class Golf extends Component {
 
 
     render(){
+      let courses=this.props.courses.map((course)=>{
+        console.log("looking for course",course)
+        return <h4>{course.course_name}</h4>
+      })
       const { selectedOption } = this.state;
         return (
 
@@ -99,14 +157,9 @@ class Golf extends Component {
          </div>
             <h1>{this.props.golfScores.tour_name}</h1>
             <h2>{this.props.golfScores.tournament_name}</h2>
-            <h3>{this.props.golfScores.round_state}</h3>
-            <ul>
-           
-
-            {this.props.players.map((p)=> <li key = {p.player_id}><img src= {`https://pga-tour-res.cloudinary.com/image/upload/b_rgb:cecece,c_fill,d_headshots_default.png,f_jpg,g_face:center,h_65,q_auto,w_65/headshots_${p.player_id}.png`}/>
-            {p.current_position}__{p.player_bio.country}__{p.current_position}__{p.player_bio.first_name}__{p.player_bio.last_name}__{p.today}__{p.thru}__{p.total} 
-            </li>)}
-            </ul>
+          
+            <h4>Round{this.props.golfScores.current_round}{this.props.golfScores.round_state}</h4>
+            {courses}
           
 
             
@@ -127,8 +180,9 @@ const mapStateToProps = (state) => {
       golfScores: state.golfScores,
       leaderboard: state.golfscores,
       players:state.players,
-      tourSelected: state.selectedTour
-     
+      tourSelected: state.selectedTour,
+      uid:state.uid,
+      courses:state.courses
      
 
       
@@ -138,9 +192,10 @@ const mapStateToProps = (state) => {
   const mapDispatchToProps = (dispatch) => {
     return {
       //onGolfFetched: () => dispatch(actionCreators.golfFetched()),
-      //onSchedualFetched: (tourSelected) => dispatch(actionCreators.scheduleFetched()),
+      onSchedualFetched: () => dispatch(actionCreators.scheduleFetched()),
       onTourSelected: (selectedTour)=> dispatch({type:actionTypes.SELECTED_TOUR,value:selectedTour}),
-      onGolfFetched:(json)=>dispatch({type:actionTypes.GOLF_API_FETCHED , golf: json.leaderboard, players :json.leaderboard.players, isStarted:json.leaderboard.is_started,isFinished:json.leaderboard.is_finished,roundState:json.leaderboard.round_state, tourId:json.leaderboard.tournament_id})
+      onGolfFetched:(json)=>dispatch({type:actionTypes.GOLF_API_FETCHED , golf: json.leaderboard,courses:json.leaderboard.courses, players :json.leaderboard.players, isStarted:json.leaderboard.is_started,isFinished:json.leaderboard.is_finished,roundState:json.leaderboard.round_state, tourId:json.leaderboard.tournament_id}),
+      onFavSelected: (favorites)=> dispatch({type:actionTypes.FAV_SELECTED,favorites:favorites}),
     }
   }
   

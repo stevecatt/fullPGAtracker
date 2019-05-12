@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
-
+import * as actionTypes from '../store/actions/actionTypes'
 
 
 import ReactTable from "react-table";
@@ -9,17 +9,61 @@ import "react-table/react-table.css";
 
 class Tabletest extends Component {
 
+  constructor(){
+    super()
+    this.state={
+        favorites:[]
 
+    }
+}
+
+  getUserFavorites =()=>{
+    let favorites =[]
+    axios.post('https://scorestracker.herokuapp.com/get-favorites',{
+        uid:this.props.uid
+    })
+    .then(response =>{
+        console.log(response.data.favorites)
+       
+        let ids = response.data.favorites
+        let i=0
+        for(i=0;i<ids.length;i++){
+            console.log(ids[i].pga_id)
+            
+            
+            let favoritepush= this.props.players.filter(player=>player.player_id == ids[i].pga_id)
+            if (favoritepush.length > 0){
+                favorites.push(favoritepush)
+
+            }
+           
+            console.log(favoritepush)
+            
+            
+
+            
+        }
+       this.setState({
+           favorites:favorites
+
+       })
+       this.props.onFavSelected(this.state.favorites)
+
+   
+    })
+   // console.log("this is outside",favorites)
+}
 
 // use this to save the pid to database
   saveFavourite= (id) => {
     console.log(id)
-    axios.post('http://localhost:8080/save-favorite',{
+    axios.post('https://scorestracker.herokuapp.com/save-favorite',{
       playerId : id,
       userId: this.props.uid
     
     }).then(response =>{
       //add a function to select the players from the api. hopefully
+      this.getUserFavorites()
       console.log(response)
     })
   }
@@ -134,6 +178,14 @@ const mapStateToProps = (state) => {
       
     }
   }
+
+  const mapDispatchToProps = (dispatch) => {
+    return {
+     
+      onFavSelected: (favorites)=> dispatch({type:actionTypes.FAV_SELECTED,favorites:favorites}),
+     
+    }
+  }
   
 
-export default connect(mapStateToProps)(Tabletest);
+export default connect(mapStateToProps,mapDispatchToProps )(Tabletest);

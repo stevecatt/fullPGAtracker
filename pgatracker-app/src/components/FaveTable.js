@@ -1,26 +1,75 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
-
+import * as actionTypes from '../store/actions/actionTypes'
 
 
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Tabletest from './Tabletest';
+import Golf from './Golfscores';
 
 class FaveTable extends Component {
+  constructor(){
+    super()
+    this.state={
+        favorites:[]
+
+    }
+}
+
+
+  getUserFavorites =()=>{
+    let favorites =[]
+    axios.post('https://scorestracker.herokuapp.com/get-favorites',{
+        uid:this.props.uid
+    })
+    .then(response =>{
+        console.log(response.data.favorites)
+       
+        let ids = response.data.favorites
+        let i=0
+        for(i=0;i<ids.length;i++){
+            console.log(ids[i].pga_id)
+            
+            
+            let favoritepush= this.props.players.filter(player=>player.player_id == ids[i].pga_id)
+            if (favoritepush.length > 0){
+                favorites.push(favoritepush)
+
+            }
+           
+            console.log(favoritepush)
+            
+            
+
+            
+        }
+       this.setState({
+           favorites:favorites
+
+       })
+       this.props.onFavSelected(this.state.favorites)
+
+   
+    })
+   // console.log("this is outside",favorites)
+}
 
 
 
 //use this to remove the pid to database
   removeFavourite= (id) => {
-    console.log(id)
-    axios.post('http://localhost:8080/remove-favorite',{
+    console.log(id,this.props.uid)
+    axios.post('https://scorestracker.herokuapp.com/remove-favorite',{
       playerId : id,
       userId: this.props.uid
+
+
     
     
     }).then(response =>{
-     
+     this.getUserFavorites()
       console.log(response)
     })
   }
@@ -47,17 +96,17 @@ class FaveTable extends Component {
       let favor=favs[i]
       let o=0
       for (o=0;o<favor.length;o++){
-        console.log("this is favor",favor[o])
+        //console.log("this is favor",favor[o])
         let newFavoritePush = favor[o]
         favData.push(newFavoritePush)
 
       }
-      console.log("this is favdata",favData)
+      //console.log("this is favdata",favData)
       
     }
 
     let data=favData
-    console.log("this is data",data)
+    //console.log("this is data",data)
 
     const columns = [
       
@@ -125,15 +174,19 @@ class FaveTable extends Component {
 
     return (
           <div>
+              <Golf/>
               <ReactTable
                 data={data}
                 columns={columns}
-                defaultPageSize = {10}
-                pageSizeOptions = {[10, 20, 50]}
+                noDataText="Login to view Favorites"
+                minRows={0}
+                defaultPageSize = {5}
+                pageSizeOptions = {[5, 10, 150]}
                 showPaginationTop
                 showPaginationBottom = {false}
                 defaultFilterMethod={this.customFilter}
               />
+              <Tabletest/>
           </div>      
     )
 
@@ -154,6 +207,13 @@ const mapStateToProps = (state) => {
       
     }
   }
-  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+     
+      onFavSelected: (favorites)=> dispatch({type:actionTypes.FAV_SELECTED,favorites:favorites}),
+     
+    }
+  }
 
-export default connect(mapStateToProps)(FaveTable);
+
+export default connect(mapStateToProps,mapDispatchToProps)(FaveTable);
