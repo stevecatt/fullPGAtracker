@@ -3,6 +3,15 @@ import {NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Fragment } from 'react';
 import Selector from './Selector'
+import Breakpoint, { BreakpointProvider } from 'react-socks';
+import { setDefaultBreakpoints } from 'react-socks';
+setDefaultBreakpoints([
+  { xs: 0 },
+  { s: 376 },
+  { m: 426 },
+  { l: 769 },
+  { xl: 1025 }
+]);
 
 
 

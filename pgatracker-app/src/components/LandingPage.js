@@ -8,6 +8,7 @@ import '../App.css';
 import axios from "axios"
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Breakpoint, { BreakpointProvider } from 'react-socks';
  
 
 class LandingPage extends Component {
@@ -20,7 +21,15 @@ class LandingPage extends Component {
     }
   }
 
-  
+  customFilter = (filter, row) => {
+    const id = filter.pivotId || filter.id;
+    if (row[id] !== null && typeof row[id] === "string") {
+      return (row[id] !== undefined
+        ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
+        : true);
+    }
+  }
+
 
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });

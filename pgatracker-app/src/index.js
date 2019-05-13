@@ -25,6 +25,8 @@ import FaveTable from './components/FaveTable';
 import Schedule from './components/Schedule'
 import LandingPage from './components/LandingPage';
 import History from  './components/History'
+import Breakpoint, { BreakpointProvider } from 'react-socks';
+import { setDefaultBreakpoints } from 'react-socks';
 
 // composeEnhancers is only for debugging purposes 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -34,10 +36,19 @@ const store = createStore(reducer,composeEnhancers(
 
   setAuthenticationHeader(localStorage.getItem('jwtoken'))
 
+  setDefaultBreakpoints([
+    { xs: 0 },
+    { s: 376 },
+    { m: 426 },
+    { l: 769 },
+    { xl: 1025 }
+  ]);
+
 ReactDOM.render(
 
 <Provider store={store}> 
   <BrowserRouter>
+  <BreakpointProvider>
     <BaseLayout>
       <Switch>
         <Route path="/" exact component={LandingPage} />
@@ -53,6 +64,7 @@ ReactDOM.render(
         <App />
       </Switch>
     </BaseLayout>
+    </BreakpointProvider>
   </BrowserRouter>     
 </Provider>
 , document.getElementById('root'));

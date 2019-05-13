@@ -8,6 +8,16 @@ import '../App.css';
 import axios from "axios"
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Breakpoint, { BreakpointProvider } from 'react-socks';
+import { setDefaultBreakpoints } from 'react-socks';
+
+setDefaultBreakpoints([
+  { xs: 0 },
+  { s: 376 },
+  { m: 426 },
+  { l: 769 },
+  { xl: 1025 }
+]);
 
 class Schedule extends Component {
 
@@ -134,7 +144,8 @@ class Schedule extends Component {
                 </div>
                  <div className="col-md-4"></div>
             </div>
-            <ReactTable
+            <Breakpoint l only>
+            <ReactTable className="table-responsive"
               data={data}
               columns={columns}
               defaultPageSize = {10}
@@ -143,6 +154,7 @@ class Schedule extends Component {
               showPaginationBottom = {false}
               defaultFilterMethod={this.customFilter}
             />
+           </Breakpoint>
         </div>      
         )
     }
