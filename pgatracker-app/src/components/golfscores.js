@@ -7,15 +7,15 @@ import * as urls from '../utils/urls'
 import '../App.css';
 import axios from "axios"
 
-
-const golfTours = [
-  { label: "PGA Tour", value: "r"},
-  { label: "PGA Champions Tour", value: "s" },
-  { label: "WEB.COM Tour", value: "h" },
-  { label: "MACKENZIE Tour Canada", value: "c" },
-  { label: "Latinoamérica", value:"m"}
+//moved to utils 
+// const golfTours = [
+//   { label: "PGA Tour", value: "r"},
+//   { label: "PGA Champions Tour", value: "s" },
+//   { label: "WEB.COM Tour", value: "h" },
+//   { label: "MACKENZIE Tour Canada", value: "c" },
+//   { label: "Latinoamérica", value:"m"}
  
-];
+// ];
 
 
 class Golf extends Component {
@@ -76,7 +76,7 @@ class Golf extends Component {
     this.props.onTourSelected(selectedOption.value)
     let tour = selectedOption.value
     this.golfFetched(tour)
-    this.getUserFavorites()
+    //this.getUserFavorites()
    //this.props.onSchedualFetched(selectedOption.value)
   }
 
@@ -109,6 +109,8 @@ class Golf extends Component {
         .then((json)=>{
           console.log(json.leaderboard)
           this.props.onGolfFetched(json)
+        }).then(()=>{
+          this.getUserFavorites()
         })
       })
     
@@ -151,7 +153,7 @@ class Golf extends Component {
               <div className="col-md-4">
               <Select placeholder="Select Tour" value={selectedOption.value}
               onChange={this.handleChange} 
-              options={ golfTours } />
+              options={ urls.golfTours } />
               </div>
               <div className="col-md-4"></div>
             </div>

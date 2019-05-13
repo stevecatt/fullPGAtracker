@@ -17,7 +17,7 @@ const initialState = {
     courses:[],
     pgaTournaments:[],
     seniorTournaments:[],
-    wedTournaments:[],
+    webTournaments:[],
     latinTournaments:[],
     canadaTournaments:[]
   }
@@ -44,7 +44,7 @@ const initialState = {
           schedule: action.schedule,
           pgaTournaments:action.pga,
           seniorTournaments:action.champ,
-          wedTournaments:action.wed,
+          webTournaments:action.web,
           latinTournaments:action.latino,
           canadaTournaments:action.canada
         }

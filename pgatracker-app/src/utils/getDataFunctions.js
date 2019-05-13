@@ -1,8 +1,9 @@
 import axios from 'axios'
+import * as urls from '../utils/urls';
 // will need a way to get uid for this 
-export function getUserFavorites(uid){
-    
-    axios.post('https://scorestracker.herokuapp.com/get-favorites',{
+export function getUserFavorites(uid,player){
+    let favorites=[]
+    axios.post(urls.getFavorites,{
         uid:uid
     })
     .then(response =>{
@@ -14,7 +15,7 @@ export function getUserFavorites(uid){
             console.log(ids[i].pga_id)
             
             
-            let favoritepush= this.props.players.filter(player=>player.player_id == ids[i].pga_id)
+            let favoritepush= player.filter(player=>player.player_id == ids[i].pga_id)
             if (favoritepush.length > 0){
                 favorites.push(favoritepush)
 
@@ -22,7 +23,7 @@ export function getUserFavorites(uid){
            
             console.log(favoritepush)
             
-            
+            return favorites
 
             
         }

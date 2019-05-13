@@ -14,6 +14,7 @@ class Menu extends Component {
               {!this.props.isAuth ?<NavLink className="font-weight-bold topbar" to="/login"> login </NavLink>:null}
               {!this.props.isAuth ?<NavLink className="font-weight-bold topbar" to="/register"> Register</NavLink>:null}
               {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/logout"> logout </NavLink>:null}
+              {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/schedule"> schedule </NavLink>:null}
               {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/userpage"> User Page </NavLink>:null}
               
             </div>

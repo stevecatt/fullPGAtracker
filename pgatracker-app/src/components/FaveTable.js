@@ -9,6 +9,7 @@ import "react-table/react-table.css";
 import Tabletest from './Tabletest';
 import Golf from './Golfscores';
 import * as urls from '../utils/urls';
+import * as funcs from '../utils/getDataFunctions'
 
 class FaveTable extends Component {
   constructor(){
@@ -71,6 +72,13 @@ class FaveTable extends Component {
     
     }).then(response =>{
      this.getUserFavorites()
+    //  this.setState({
+    //   favorites:favorites
+    //  })
+
+    //  this.props.onFavSelected(this.state.favorites)
+
+
       console.log(response)
     })
   }
