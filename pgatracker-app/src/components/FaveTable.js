@@ -183,7 +183,7 @@ class FaveTable extends Component {
 
     return (
           <div>
-              <Golf/>
+              <Golf></Golf>
               <ReactTable
                 data={data}
                 columns={columns}

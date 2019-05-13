@@ -21,7 +21,20 @@ class Schedule extends Component {
 
     }
   }
+  selectTournament=(tourId,tour)=>{
+    //gets tid and tour id then feeds a history table
+    console.log("fired",tourId,tour)
+    let url = "https://statdata.pgatour.com/"+tour+"/"+tourId+"/leaderboard-v2mini.json"
+    fetch(url)
+    .then(response => response.json())
+    .then((json)=>{
+      this.props.onHistorySelected(json)
+      console.log(json.leaderboard)
+    }).then(()=>{
+      this.props.history.push('/history')
+    })
 
+  }
   
     
     customFilter = (filter, row) => {
@@ -38,6 +51,7 @@ class Schedule extends Component {
         console.log(`Option selected:`, selectedOption)
         console.log(selectedOption.value)
         this.props.onTourSelected(selectedOption.value)
+
       }
     
     
@@ -60,11 +74,11 @@ class Schedule extends Component {
         
         const columns = [
       
-            {Header: 'Actions',
+            {Header: 'View',
             Cell: props =>{
               return(
                 <button className ="saveButton" onClick={()=>
-                this.selectTournament(props.original.player_id)}>Select</button>
+                this.selectTournament(props.original.permNum,this.state.selectedOption.value)}>View Results</button>
               )
             }
           },
@@ -110,7 +124,7 @@ class Schedule extends Component {
             
           ]
         return (
-            <div>
+            <div className="container">
                <div className="row">
                   <div className="col-md-4"></div>
                  <div className="col-md-4">
@@ -138,7 +152,8 @@ class Schedule extends Component {
   
 const mapDispatchToProps = (dispatch)=>{
     return {
-      onTourSelected: (selectedTour)=> dispatch({type:actionTypes.SELECTED_TOUR,value:selectedTour})
+      onTourSelected: (selectedTour)=> dispatch({type:actionTypes.SELECTED_TOUR,value:selectedTour}),
+      onHistorySelected:(json)=>dispatch({type:actionTypes.HISTORY_SELECTED , golf: json.leaderboard,courses:json.leaderboard.courses, players :json.leaderboard.players, isStarted:json.leaderboard.is_started,isFinished:json.leaderboard.is_finished,roundState:json.leaderboard.round_state, tourId:json.leaderboard.tournament_id}),
     }
   }
   

@@ -11,11 +11,15 @@ class Menu extends Component {
     render(){
         return(
             <div>
+              <NavLink className="font-weight-bold topbar" to="/"> Home </NavLink>
               {!this.props.isAuth ?<NavLink className="font-weight-bold topbar" to="/login"> login </NavLink>:null}
               {!this.props.isAuth ?<NavLink className="font-weight-bold topbar" to="/register"> Register</NavLink>:null}
               {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/logout"> logout </NavLink>:null}
-              {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/schedule"> schedule </NavLink>:null}
+                <NavLink className="font-weight-bold topbar" to="/schedule"> schedule </NavLink>
+                
+
               {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/userpage"> User Page </NavLink>:null}
+              
               
             </div>
         )

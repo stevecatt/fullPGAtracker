@@ -49,7 +49,7 @@ class Login extends Component {
 
           this.props.onTokenRecieved(token,uid)
           setAuthenticationHeader(token)
-          this.props.history.push('/')
+          this.props.history.push('/userpage')
           }else{console.log("you messed up")}
         })
         // .then(result => {

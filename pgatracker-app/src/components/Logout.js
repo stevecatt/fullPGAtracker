@@ -9,7 +9,7 @@ class Logout extends Component{
     componentDidMount(){
         localStorage.removeItem('jwtoken')
         this.props.onLogout()
-        this.props.history.push('/login')
+        this.props.history.push('/')
     }
 
     render(){

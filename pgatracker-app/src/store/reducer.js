@@ -19,7 +19,14 @@ const initialState = {
     seniorTournaments:[],
     webTournaments:[],
     latinTournaments:[],
-    canadaTournaments:[]
+    canadaTournaments:[],
+    golfHistoryScores: [],
+    playersHistory:{},
+    isFinishedHistory:"",
+    isStartedHistory:"",
+    roundStateHistory:"",
+    tourIdHistory:"",
+    coursesHistory:[]
   }
   
   const reducer = (state = initialState, action) => {
@@ -69,6 +76,21 @@ const initialState = {
           ...state,
           favorites:action.favorites
         }
+        case actionTypes.HISTORY_SELECTED:
+        return {
+          ...state,
+          golfHistoryScores: action.golf,
+          playersHistory:action.players,
+          isFinishedHistory:action.isFinished,
+          isStartedHistory:action.isStarted,
+          roundStateHistory:action.roundState,
+          tourIdHistory:action.tourId,
+          coursesHistory:action.courses
+          
+          
+        }
+
+
     }
   
     return state

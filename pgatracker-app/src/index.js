@@ -23,6 +23,9 @@ import Userpage from './components/Userpage'
 import requireAuth from './components/requireAuth'
 import FaveTable from './components/FaveTable';
 import Schedule from './components/Schedule'
+import LandingPage from './components/LandingPage';
+import History from  './components/History'
+
 // composeEnhancers is only for debugging purposes 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,composeEnhancers(
@@ -37,13 +40,15 @@ ReactDOM.render(
   <BrowserRouter>
     <BaseLayout>
       <Switch>
-        <Route path="/" exact component={App} />
+        <Route path="/" exact component={LandingPage} />
+        
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/golf" component={Golf} />
         <Route path="/logout" component={Logout}/>
         <Route path="/userpage" component = {requireAuth(FaveTable)}/>
         <Route path="/schedule" component = {Schedule}/>
+        <Route path="/history" component = {History}/>
        
         <App />
       </Switch>
