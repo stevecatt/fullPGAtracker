@@ -29,10 +29,7 @@ db = pgp(connectionString)
 
 
 
-let books = [
-{name: 'Book 1'},
-{name: 'Book 2'}
-]
+
 
 function authenticate(req,res, next) {
 

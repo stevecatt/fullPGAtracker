@@ -16,7 +16,7 @@ import * as funcs from '../utils/dataFunctions'
 setDefaultBreakpoints([
   { xs: 0 },
   { s: 376 },
-  { m: 426 },
+  { m: 500},
   { l: 769 },
   { xl: 1025 }
 ]);
@@ -233,7 +233,7 @@ class LandingPage extends Component {
           
             <h4>Round{this.props.golfScores.current_round}{this.props.golfScores.round_state}</h4>
             {courses}
-            <Breakpoint m down>
+            <Breakpoint l down>
             <div>
             <ReactTable
                 data={data}
@@ -250,7 +250,7 @@ class LandingPage extends Component {
           
             </div>
             </Breakpoint>
-            <Breakpoint m up>
+            <Breakpoint l up>
             <div>
               <ReactTable
                 data={data}

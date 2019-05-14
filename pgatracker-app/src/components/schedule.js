@@ -14,7 +14,7 @@ import { setDefaultBreakpoints } from 'react-socks';
 setDefaultBreakpoints([
   { xs: 0 },
   { s: 376 },
-  { m: 426 },
+  { m: 500 },
   { l: 769 },
   { xl: 1025 }
 ]);
@@ -87,7 +87,7 @@ class Schedule extends Component {
           {Header: 'View',
           Cell: props =>{
             return(
-              <button className ="saveButton" onClick={()=>
+              <button className ="minisaveButton" onClick={()=>
               this.selectTournament(props.original.permNum,this.state.selectedOption.value)}></button>
             )
           },
@@ -131,7 +131,7 @@ class Schedule extends Component {
             {Header: 'View',
             Cell: props =>{
               return(
-                <button  className ="miniSaveButton" onClick={()=>
+                <button  className ="SaveButton" onClick={()=>
                 this.selectTournament(props.original.permNum,this.state.selectedOption.value)}>View</button>
               )
             },
@@ -196,7 +196,7 @@ class Schedule extends Component {
                 </div>
                  <div className="col-md-4"></div>
             </div>
-            <Breakpoint m up>
+            <Breakpoint l up>
             <ReactTable 
               data={data}
               columns={fullColumns}
@@ -207,7 +207,7 @@ class Schedule extends Component {
               defaultFilterMethod={this.customFilter}
             />
            </Breakpoint>
-           <Breakpoint m down>
+           <Breakpoint l down>
             <ReactTable 
               data={data}
               columns={mobColumns}

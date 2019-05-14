@@ -34,13 +34,10 @@ li {
 
 }
 
-button {
-  
-border-radius: 50%
-}
+
 
 .miniSaveButton {
-  background-color:blue
+  background-color:darkgray
 }
 
 @keyframes App-logo-spin {

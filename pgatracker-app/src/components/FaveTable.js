@@ -14,7 +14,7 @@ import { setDefaultBreakpoints } from 'react-socks';
 setDefaultBreakpoints([
   { xs: 0 },
   { s: 376 },
-  { m: 426 },
+  { m: 500},
   { l: 769 },
   { xl: 1025 }
 ]);
@@ -239,7 +239,7 @@ class FaveTable extends Component {
     return (
           <div className="container">
               <Golf></Golf>
-              <Breakpoint m up>
+              <Breakpoint l up>
               <ReactTable
                 data={data}
                 columns={fullColumns}
@@ -252,7 +252,7 @@ class FaveTable extends Component {
                 defaultFilterMethod={funcs.customFilter}
               />
               </Breakpoint>
-              <Breakpoint m down>
+              <Breakpoint l down>
               <ReactTable
                 data={data}
                 columns={mobColumns}

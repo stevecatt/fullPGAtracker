@@ -1,5 +1,5 @@
 import axios from 'axios'
-import * as urls from '../utils/urls';
+import * as urls from './urls';
 // will need a way to get uid for this 
 export function getUserFavorites(uid,player){
     let favorites=[]
@@ -47,3 +47,16 @@ export function customFilter(filter, row){
         : true);
     }
   }
+
+
+
+//   export function mobileBreaks(){
+//     setDefaultBreakpoints([
+//         { xs: 0 },
+//         { s: 376 },
+//         { m: 500 },
+//         { l: 769 },
+//         { xl: 1025 }
+//       ]);
+
+//   }

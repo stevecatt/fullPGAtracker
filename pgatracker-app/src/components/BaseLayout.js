@@ -6,6 +6,11 @@ import Selector from './Selector'
 import * as actionTypes from '../store/actions/actionTypes'
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 import { setDefaultBreakpoints } from 'react-socks';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import {
+ NavbarBrand, Nav, NavItem,
+} from 'reactstrap';
 
 setDefaultBreakpoints([
   { xs: 0 },
@@ -22,16 +27,22 @@ class Menu extends Component {
     render(){
         return(
             <div>
+               <NavbarBrand>
+               <Nav className="ml-auto" navbar>
+               <NavItem className="d-flex align-items-center">
               <NavLink className="font-weight-bold topbar" to="/"> Home </NavLink>
+              </NavItem>
+              <NavItem className="d-flex align-items-center">
               {!this.props.isAuth ?<NavLink className="font-weight-bold topbar" to="/login"> login </NavLink>:null}
+              </NavItem>
               {!this.props.isAuth ?<NavLink className="font-weight-bold topbar" to="/register"> Register</NavLink>:null}
               {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/logout"> logout </NavLink>:null}
                 <NavLink className="font-weight-bold topbar" to="/schedule"> schedule </NavLink>
                 
 
               {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/userpage"> User Page </NavLink>:null}
-              
-              
+              </Nav>
+              </NavbarBrand>
             </div>
         )
     }

@@ -14,10 +14,10 @@ import { setDefaultBreakpoints } from 'react-socks';
 
 setDefaultBreakpoints([
   { xs: 0 },
-  { s: 376 },
-  { m: 426 },
-  { l: 769 },
-  { xl: 1025 }
+  { s: 576 },
+  { m: 768 },
+  { l: 992 },
+  { xl: 1200 }
 ]);
  
 
@@ -134,14 +134,14 @@ class History extends Component {
           
         ]
         return(
-            <div>
+          <div className="container">
             <h2>{this.props.golfScores.tour_name}</h2>
             <h2>{this.props.golfScores.tournament_name}</h2>
           
             <h4>Round{this.props.golfScores.current_round}{this.props.golfScores.round_state}</h4>
             {courses}
             <Breakpoint m up>
-            <div className="container">
+            
               <ReactTable
                 data={data}
                 columns={fullColumns}
@@ -150,10 +150,10 @@ class History extends Component {
                 showPaginationTop
                 showPaginationBottom = {false}
                 defaultFilterMethod={funcs.customFilter}
-              /></div>
+              />
               </Breakpoint>
               <Breakpoint m down>
-               <div className="container">
+              
               <ReactTable
                 data={data}
                 columns={mobColumns}
@@ -162,7 +162,7 @@ class History extends Component {
                 showPaginationTop
                 showPaginationBottom = {false}
                 defaultFilterMethod={funcs.customFilter}
-              /></div>
+              />
               </Breakpoint>
               </div>
         )
