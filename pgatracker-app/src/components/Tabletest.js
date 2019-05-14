@@ -3,10 +3,21 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import * as actionTypes from '../store/actions/actionTypes'
 import * as urls from '../utils/urls'
+import * as funcs from '../utils/dataFunctions'
 
 
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Breakpoint, { BreakpointProvider } from 'react-socks';
+import { setDefaultBreakpoints } from 'react-socks';
+
+setDefaultBreakpoints([
+  { xs: 0 },
+  { s: 376 },
+  { m: 426 },
+  { l: 769 },
+  { xl: 1025 }
+]);
 
 class Tabletest extends Component {
 
@@ -56,9 +67,9 @@ class Tabletest extends Component {
 }
 
 // use this to save the pid to database
-  saveFavourite= (id) => {
+  saveFavorite= (id) => {
     console.log(id)
-    axios.post('https://scorestracker.herokuapp.com/save-favorite',{
+    axios.post(urls.saveFavorite,{
       playerId : id,
       userId: this.props.uid
     
@@ -72,26 +83,73 @@ class Tabletest extends Component {
   
 
 
-  customFilter = (filter, row) => {
-    const id = filter.pivotId || filter.id;
-    if (row[id] !== null && typeof row[id] === "string") {
-      return (row[id] !== undefined
-        ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
-        : true);
-    }
-  }
+  // customFilter = (filter, row) => {
+  //   const id = filter.pivotId || filter.id;
+  //   if (row[id] !== null && typeof row[id] === "string") {
+  //     return (row[id] !== undefined
+  //       ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
+  //       : true);
+  //   }
+  // }
   
   render() {
     const data = this.props.players
     console.log(this.props.players)
 
-    const columns = [
+    const mobColumns = [
+      
+      {Header: 's',
+      Cell: props =>{
+        return(
+          <button className ="saveButton" onClick={()=>
+          this.saveFavorite(props.original.player_id)}></button>
+        )
+      },
+      maxWidth:50,
+    },
+
+
+      
+        {
+        Header:'Pos',
+        accessor: 'current_position',
+        maxWidth:50,
+        style:{
+          textAlign:"center"
+        }
+
+    },
+        {
+        Header: 'First Name',
+        accessor: 'player_bio.short_name',
+        maxWidth:50,
+        filterable: true
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'player_bio.last_name',
+        filterable: true
+      },
+      
+      
+      {
+        Header: 'Total',
+        accessor: 'total',
+        maxWidth:50,
+        style:{
+          textAlign:"center"
+        }
+      },
+      
+    ]
+
+    const fullColumns = [
       
       {Header: 'Actions',
       Cell: props =>{
         return(
           <button className ="saveButton" onClick={()=>
-          this.saveFavourite(props.original.player_id)}>Save</button>
+          this.saveFavorite(props.original.player_id)}>Save</button>
         )
       }
     },
@@ -151,15 +209,28 @@ class Tabletest extends Component {
 
     return (
           <div>
+              <Breakpoint m up>
               <ReactTable
                 data={data}
-                columns={columns}
+                columns={fullColumns}
                 defaultPageSize = {10}
                 pageSizeOptions = {[10, 20, 50]}
                 showPaginationTop
                 showPaginationBottom = {false}
-                defaultFilterMethod={this.customFilter}
+                defaultFilterMethod={funcs.customFilter}
               />
+              </Breakpoint>
+               <Breakpoint m down>
+               <ReactTable
+                data={data}
+                columns={mobColumns}
+                defaultPageSize = {10}
+                pageSizeOptions = {[10, 20, 50]}
+                showPaginationTop
+                showPaginationBottom = {false}
+                defaultFilterMethod={funcs.customFilter}
+              />
+               </Breakpoint>
           </div>      
     )
 

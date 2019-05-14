@@ -8,6 +8,7 @@ class Logout extends Component{
 
     componentDidMount(){
         localStorage.removeItem('jwtoken')
+        localStorage.removeItem('uid')
         this.props.onLogout()
         this.props.history.push('/')
     }

@@ -146,8 +146,9 @@ class Golf extends Component {
       const { selectedOption } = this.state;
         return (
 
-            <div>
-              <div className="container">
+            <div className="container">
+            <h2>{this.props.golfScores.tour_name}</h2>
+              <div >
               <div className="row">
               <div className="col-md-4"></div>
               <div className="col-md-4">
@@ -158,7 +159,7 @@ class Golf extends Component {
               <div className="col-md-4"></div>
             </div>
          </div>
-            <h1>{this.props.golfScores.tour_name}</h1>
+          
             <h2>{this.props.golfScores.tournament_name}</h2>
           
             <h4>Round{this.props.golfScores.current_round}{this.props.golfScores.round_state}</h4>

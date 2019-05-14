@@ -114,7 +114,7 @@ let user = req.body.userId
 let pgaId = parseInt(req.body.playerId)
 console.log(user,pgaId)
 
-db.one('DELETE FROM favorite_golfers WHERE pga_id = $1 AND user_id = $2 RETURNING id',[pgaId,user])
+db.any('DELETE FROM favorite_golfers WHERE pga_id = $1 AND user_id = $2 RETURNING id',[pgaId,user])
 .then((deleted)=>{
   if (deleted){
     console.log(deleted)

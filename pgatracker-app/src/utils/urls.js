@@ -6,7 +6,7 @@
 
 
 
-export const removeFavorite = 'http:/localhost:8080/remove-favorite'
+export const removeFavorite = 'http://localhost:8080/remove-favorite'
 export const saveFavorite = 'http://localhost:8080/save-favorite'
 export const login = 'http://localhost:8080/login'
 export const register = 'http://localhost:8080/register'
@@ -20,5 +20,4 @@ export const golfTours = [
     { label: "Latinoamérica", value:"m"}
    
   ];
-
 

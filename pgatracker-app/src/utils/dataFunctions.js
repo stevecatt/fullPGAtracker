@@ -37,3 +37,13 @@ export function getUserFavorites(uid,player){
     })
    // console.log("this is outside",favorites)
 }
+
+
+export function customFilter(filter, row){
+    const id = filter.pivotId || filter.id;
+    if (row[id] !== null && typeof row[id] === "string") {
+      return (row[id] !== undefined
+        ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
+        : true);
+    }
+  }

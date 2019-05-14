@@ -46,6 +46,7 @@ class Login extends Component {
           let uid=response.data.uid
 
           localStorage.setItem('jwtoken',token)
+          localStorage.setItem('uid',uid)
 
           this.props.onTokenRecieved(token,uid)
           setAuthenticationHeader(token)
@@ -74,7 +75,7 @@ class Login extends Component {
 
     render(){
         return(
-            <div>
+            <div className="container">
             <h1>Login</h1>
             <input type="text" onChange={this.handleTextBoxChange} placeholder="user name" name="userName" />
             <input type="password" onChange={this.handleTextBoxChange} placeholder="password" name="password" />

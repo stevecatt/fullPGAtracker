@@ -81,16 +81,61 @@ class Schedule extends Component {
           data = this.props.latin
         }
         
-        
-        const columns = [
+        //mob site columns
+        const mobColumns = [
+      
+          {Header: 'View',
+          Cell: props =>{
+            return(
+              <button className ="saveButton" onClick={()=>
+              this.selectTournament(props.original.permNum,this.state.selectedOption.value)}></button>
+            )
+          },
+          maxWidth:50,
+        },
+    
+    
+          
+         
+            {
+            Header:'Tournament Name',
+            accessor: 'trnName.short',
+            style:{
+              textAlign:"center"
+            }
+    
+        },
+            {
+            Header: 'Start Date',
+            accessor: 'date.start',
+            maxWidth:100,
+            filterable: true
+          },
+          
+          
+          {
+            Header:'',
+            accessor:'champions[0].playerName.last',
+            filterable: true,
+            maxWidth:150,
+            style:{
+              textAlign:"center"
+            }
+          },
+          
+          
+        ]
+        //full site columns
+        const fullColumns = [
       
             {Header: 'View',
             Cell: props =>{
               return(
-                <button className ="saveButton" onClick={()=>
-                this.selectTournament(props.original.permNum,this.state.selectedOption.value)}>View Results</button>
+                <button  className ="miniSaveButton" onClick={()=>
+                this.selectTournament(props.original.permNum,this.state.selectedOption.value)}>View</button>
               )
-            }
+            },
+            maxWidth:75,
           },
       
       
@@ -98,7 +143,7 @@ class Schedule extends Component {
            
               {
               Header:'Tournament Name',
-              accessor: 'trnName.official',
+              accessor: 'trnName.short',
               style:{
                 textAlign:"center"
               }
@@ -107,6 +152,7 @@ class Schedule extends Component {
               {
               Header: 'Start Date',
               accessor: 'date.start',
+              maxWidth:100,
               filterable: true
             },
             {
@@ -118,6 +164,8 @@ class Schedule extends Component {
               Header:'Champion',
               accessor:'champions[0].playerName.first',
               soratble: false,
+              filterable: true,
+              maxWidth:150,
               style:{
                 textAlign:"center"
               }
@@ -126,6 +174,8 @@ class Schedule extends Component {
             {
               Header:'',
               accessor:'champions[0].playerName.last',
+              filterable: true,
+              maxWidth:150,
               style:{
                 textAlign:"center"
               }
@@ -133,6 +183,8 @@ class Schedule extends Component {
             
             
           ]
+
+
         return (
             <div className="container">
                <div className="row">
@@ -144,10 +196,21 @@ class Schedule extends Component {
                 </div>
                  <div className="col-md-4"></div>
             </div>
-            <Breakpoint l only>
-            <ReactTable className="table-responsive"
+            <Breakpoint m up>
+            <ReactTable 
               data={data}
-              columns={columns}
+              columns={fullColumns}
+              defaultPageSize = {10}
+              pageSizeOptions = {[10, 20, 50]}
+              showPaginationTop
+              showPaginationBottom = {false}
+              defaultFilterMethod={this.customFilter}
+            />
+           </Breakpoint>
+           <Breakpoint m down>
+            <ReactTable 
+              data={data}
+              columns={mobColumns}
               defaultPageSize = {10}
               pageSizeOptions = {[10, 20, 50]}
               showPaginationTop

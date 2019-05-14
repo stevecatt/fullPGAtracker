@@ -2,14 +2,22 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import * as actionTypes from '../store/actions/actionTypes'
-
-
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Tabletest from './Tabletest';
 import Golf from './Golfscores';
 import * as urls from '../utils/urls';
-import * as funcs from '../utils/getDataFunctions'
+import * as funcs from '../utils/dataFunctions'
+import Breakpoint, { BreakpointProvider } from 'react-socks';
+import { setDefaultBreakpoints } from 'react-socks';
+
+setDefaultBreakpoints([
+  { xs: 0 },
+  { s: 376 },
+  { m: 426 },
+  { l: 769 },
+  { xl: 1025 }
+]);
 
 class FaveTable extends Component {
   constructor(){
@@ -86,14 +94,14 @@ class FaveTable extends Component {
   
 
 
-  customFilter = (filter, row) => {
-    const id = filter.pivotId || filter.id;
-    if (row[id] !== null && typeof row[id] === "string") {
-      return (row[id] !== undefined
-        ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
-        : true);
-    }
-  }
+  // customFilter = (filter, row) => {
+  //   const id = filter.pivotId || filter.id;
+  //   if (row[id] !== null && typeof row[id] === "string") {
+  //     return (row[id] !== undefined
+  //       ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
+  //       : true);
+  //   }
+  // }
   
   render() {
 
@@ -117,7 +125,54 @@ class FaveTable extends Component {
     let data=favData
     //console.log("this is data",data)
 
-    const columns = [
+    const mobColumns = [
+      
+      {Header: 'R',
+      Cell: props =>{
+        return(
+          <button className ="removeButton" onClick={()=>
+          this.removeFavourite(props.original.player_id)}></button>
+        )
+      },
+      maxWidth:50,
+    },
+
+
+      
+        {
+        Header:'Pos',
+        accessor: 'current_position',
+        maxWidth:50,
+        style:{
+          textAlign:"center"
+        }
+
+    },
+        {
+        Header: 'First Name',
+        accessor: 'player_bio.short_name',
+        maxWidth:50,
+        filterable: true
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'player_bio.last_name',
+        filterable: true
+      },
+      
+      
+      {
+        Header: 'Total',
+        accessor: 'total',
+        maxWidth:50,
+        style:{
+          textAlign:"center"
+        }
+      },
+      
+    ]
+
+    const fullColumns = [
       
       {Header: 'Remove',
       Cell: props =>{
@@ -182,19 +237,34 @@ class FaveTable extends Component {
   
 
     return (
-          <div>
+          <div className="container">
               <Golf></Golf>
+              <Breakpoint m up>
               <ReactTable
                 data={data}
-                columns={columns}
+                columns={fullColumns}
                 noDataText="Login to view Favorites"
                 minRows={0}
                 defaultPageSize = {5}
                 pageSizeOptions = {[5, 10, 150]}
                 showPaginationTop
                 showPaginationBottom = {false}
-                defaultFilterMethod={this.customFilter}
+                defaultFilterMethod={funcs.customFilter}
               />
+              </Breakpoint>
+              <Breakpoint m down>
+              <ReactTable
+                data={data}
+                columns={mobColumns}
+                noDataText="Login to view Favorites"
+                minRows={0}
+                defaultPageSize = {5}
+                pageSizeOptions = {[5, 10, 150]}
+                showPaginationTop
+                showPaginationBottom = {false}
+                defaultFilterMethod={funcs.customFilter}
+              />
+              </Breakpoint>
               <Tabletest/>
           </div>      
     )

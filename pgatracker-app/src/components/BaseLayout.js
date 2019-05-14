@@ -3,8 +3,10 @@ import {NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Fragment } from 'react';
 import Selector from './Selector'
+import * as actionTypes from '../store/actions/actionTypes'
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 import { setDefaultBreakpoints } from 'react-socks';
+
 setDefaultBreakpoints([
   { xs: 0 },
   { s: 376 },
@@ -47,11 +49,12 @@ class Footer extends Component {
   }
   
   class BaseLayout extends Component {
-    // think about this for later since we dont have the uid at the moment
-    // componentDidMount(){
-    //   let token = localStorage.getItem('jwtoken')
-    //   this.props.onTokenRecieved(token)
-    // }
+    //think about this for later since we dont have the uid at the moment
+    componentDidMount(){
+      let token = localStorage.getItem('jwtoken')
+      let uid = localStorage.getItem('uid')
+      this.props.onTokenRecieved(token,uid)
+    }
   
     render() {
       return (
@@ -70,4 +73,12 @@ class Footer extends Component {
       isAuth: state.isAuthenticated
     }
   }
-  export default connect(mapStateToProps)(BaseLayout)
+
+  const mapDispatchToProps = (dispatch)=>{
+    return {
+      onTokenRecieved: (token,uid)=> dispatch({type:actionTypes.IS_AUTHENITCATED, token: token,uid:uid})
+    }
+  }
+
+
+  export default connect(mapStateToProps,mapDispatchToProps)(BaseLayout)

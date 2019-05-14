@@ -9,7 +9,17 @@ import axios from "axios"
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Breakpoint, { BreakpointProvider } from 'react-socks';
+import { setDefaultBreakpoints } from 'react-socks';
+import * as funcs from '../utils/dataFunctions'
  
+
+setDefaultBreakpoints([
+  { xs: 0 },
+  { s: 376 },
+  { m: 426 },
+  { l: 769 },
+  { xl: 1025 }
+]);
 
 class LandingPage extends Component {
     constructor(){
@@ -21,14 +31,14 @@ class LandingPage extends Component {
     }
   }
 
-  customFilter = (filter, row) => {
-    const id = filter.pivotId || filter.id;
-    if (row[id] !== null && typeof row[id] === "string") {
-      return (row[id] !== undefined
-        ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
-        : true);
-    }
-  }
+  // customFilter = (filter, row) => {
+  //   const id = filter.pivotId || filter.id;
+  //   if (row[id] !== null && typeof row[id] === "string") {
+  //     return (row[id] !== undefined
+  //       ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
+  //       : true);
+  //   }
+  // }
 
 
   handleChange = (selectedOption) => {
@@ -66,6 +76,7 @@ class LandingPage extends Component {
       .then((json)=>{
         console.log (json.tid)
         let tourId=json.tid
+        //let url = "https://statdata/pgattour.com/r/480/leaderboard-v2mini.json"
         let url = "https://statdata.pgatour.com/"+tour+"/"+tourId+"/leaderboard-v2mini.json"
         fetch(url)
         .then(response => response.json())
@@ -103,7 +114,48 @@ class LandingPage extends Component {
 
     render(){
       const data = this.props.players
-      const columns = [
+
+      //using this for mobile site
+      const mobColumns = [
+    
+  
+        
+        
+          {
+          Header:'Pos',
+          accessor: 'current_position',
+          maxWidth: 50,
+          style:{
+            textAlign:"center"
+          }
+  
+      },
+          {
+          Header: 'First Name',
+          accessor: 'player_bio.short_name',
+          maxWidth: 50,
+          filterable: true
+        },
+        {
+          Header: 'Last Name',
+          accessor: 'player_bio.last_name',
+          filterable: true
+        },
+        
+        
+        {
+          Header: 'Total',
+          accessor: 'total',
+          maxWidth: 50,
+          style:{
+            textAlign:"center"
+          }
+        },
+        
+      ]
+
+      //use this for full site
+      const fullColumns = [
     
   
         {Header :"Image",
@@ -163,8 +215,9 @@ class LandingPage extends Component {
       const { selectedOption } = this.state;
         return (
 
-            <div>
-              <div className="container">
+            <div className="container">
+            <h2>{this.props.golfScores.tour_name}</h2>
+              <div>
               <div className="row">
               <div className="col-md-4"></div>
               <div className="col-md-4">
@@ -175,22 +228,41 @@ class LandingPage extends Component {
               <div className="col-md-4"></div>
             </div>
          </div>
-            <h1>{this.props.golfScores.tour_name}</h1>
+           
             <h2>{this.props.golfScores.tournament_name}</h2>
           
             <h4>Round{this.props.golfScores.current_round}{this.props.golfScores.round_state}</h4>
             {courses}
+            <Breakpoint m down>
             <div>
-              <ReactTable
+            <ReactTable
                 data={data}
-                columns={columns}
+                columns={mobColumns}
                 defaultPageSize = {10}
                 pageSizeOptions = {[10, 20, 50]}
                 showPaginationTop
                 showPaginationBottom = {false}
-                defaultFilterMethod={this.customFilter}
+                defaultFilterMethod={funcs.customFilter}
               />
-          </div>      
+            
+
+
+          
+            </div>
+            </Breakpoint>
+            <Breakpoint m up>
+            <div>
+              <ReactTable
+                data={data}
+                columns={fullColumns}
+                defaultPageSize = {10}
+                pageSizeOptions = {[10, 20, 50]}
+                showPaginationTop
+                showPaginationBottom = {false}
+                defaultFilterMethod={funcs.customFilter}
+              />
+          </div>  
+          </Breakpoint>    
 
             
             

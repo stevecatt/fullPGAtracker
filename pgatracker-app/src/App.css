@@ -7,7 +7,7 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.container {text-align: center}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -23,10 +23,26 @@
   color: #61dafb;
 }
 
+img {
+  border-radius: 50%;
+  width: 50px;
+  height:50px
+}
+
 li {
   list-style: none;
 
 }
+
+button {
+  
+border-radius: 50%
+}
+
+.miniSaveButton {
+  background-color:blue
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -8,19 +8,30 @@ import '../App.css';
 import axios from "axios"
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import * as funcs from '../utils/dataFunctions'
+import Breakpoint, { BreakpointProvider } from 'react-socks';
+import { setDefaultBreakpoints } from 'react-socks';
+
+setDefaultBreakpoints([
+  { xs: 0 },
+  { s: 376 },
+  { m: 426 },
+  { l: 769 },
+  { xl: 1025 }
+]);
  
 
 class History extends Component {
 
-    
-    customFilter = (filter, row) => {
-        const id = filter.pivotId || filter.id;
-        if (row[id] !== null && typeof row[id] === "string") {
-          return (row[id] !== undefined
-            ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
-            : true);
-        }
-      }
+
+    // customFilter = (filter, row) => {
+    //     const id = filter.pivotId || filter.id;
+    //     if (row[id] !== null && typeof row[id] === "string") {
+    //       return (row[id] !== undefined
+    //         ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
+    //         : true);
+    //     }
+    //   }
     
 
     render(){
@@ -31,7 +42,45 @@ class History extends Component {
             return <h4>{course.course_name}</h4>
         })
 
-        const columns = [
+        const mobColumns = [
+    
+  
+        
+        
+            {
+            Header:'Pos',
+            accessor: 'current_position',
+            maxWidth: 50,
+            style:{
+              textAlign:"center"
+            }
+    
+        },
+            {
+            Header: 'First Name',
+            accessor: 'player_bio.short_name',
+            maxWidth: 50,
+            filterable: true
+          },
+          {
+            Header: 'Last Name',
+            accessor: 'player_bio.last_name',
+            filterable: true
+          },
+          
+          
+          {
+            Header: 'Total',
+            accessor: 'total',
+            maxWidth: 50,
+            style:{
+              textAlign:"center"
+            }
+          },
+          
+        ]
+
+        const fullColumns = [
       
     
           {Header :"Image",
@@ -86,21 +135,35 @@ class History extends Component {
         ]
         return(
             <div>
-            <h1>{this.props.golfScores.tour_name}</h1>
+            <h2>{this.props.golfScores.tour_name}</h2>
             <h2>{this.props.golfScores.tournament_name}</h2>
           
             <h4>Round{this.props.golfScores.current_round}{this.props.golfScores.round_state}</h4>
             {courses}
-            <div>
+            <Breakpoint m up>
+            <div className="container">
               <ReactTable
                 data={data}
-                columns={columns}
+                columns={fullColumns}
                 defaultPageSize = {10}
                 pageSizeOptions = {[10, 20, 50]}
                 showPaginationTop
                 showPaginationBottom = {false}
-                defaultFilterMethod={this.customFilter}
+                defaultFilterMethod={funcs.customFilter}
               /></div>
+              </Breakpoint>
+              <Breakpoint m down>
+               <div className="container">
+              <ReactTable
+                data={data}
+                columns={mobColumns}
+                defaultPageSize = {10}
+                pageSizeOptions = {[10, 20, 50]}
+                showPaginationTop
+                showPaginationBottom = {false}
+                defaultFilterMethod={funcs.customFilter}
+              /></div>
+              </Breakpoint>
               </div>
         )
     }
