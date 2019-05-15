@@ -11,7 +11,8 @@ const PORT = process.env.PORT || 8080
 
 app.use(cors())
 
-app.use(bodyParser.json())
+
+app.use(bodyParser.json({limit: '50mb'}))
 
 
 
@@ -65,18 +66,20 @@ app.get('/hello', (req,res) => {
 
   //adding a new user 
   app.post('/register', (req,res) => {
-    let userName = req.body.userName
-    let firstName = req.body.firstName
-    let lastName= req.body.lastName
+    //removed name requirements from registration
+     let userName = req.body.userName
+    // let firstName = req.body.firstName
+    //let lastName= req.body.lastName
     let hash = bcrypt.hashSync(req.body.password, saltRounds)
-console.log(userName,firstName,lastName,hash)
+console.log(userName,hash)
 
     db.one('SELECT EXISTS(SELECT user_name FROM users WHERE user_name = $1)', [userName])
     .then((user) => {
       if (user.exists) {
         res.json({exists: true})
       } else {
-        db.one('INSERT INTO users (first_name,last_name,user_name, hash) VALUES($1,$2,$3,$4) RETURNING id', [firstName, lastName,userName, hash])
+        //db.one('INSERT INTO users (first_name,last_name,user_name, hash) VALUES($1,$2,$3,$4) RETURNING id', [firstName, lastName,userName, hash])
+        db.one('INSERT INTO users (user_name, hash) VALUES($1,$2) RETURNING id', [userName, hash])
         .then((added)=>{
           if(added){
             console.log(added)
@@ -197,7 +200,28 @@ db.one('INSERT INTO favorite_golfers (pga_id, user_id) VALUES($1,$2) RETURNING i
   })
   
         
-     
+  app.post('/apisc',(req,res) => {
+
+    const title = req.body
+  
+  
+    db.one('INSERT INTO backup_json (saved_json) VALUES($1) RETURNING id', [title])
+.then((success)=>{
+  console.log(success)
+  if(success){
+    console.log(success)
+    res.json({success: true,message:'weve added one'})
+  }
+  else {
+    res.json({error, message: 'need to be logged in '})
+  }
+}
+).catch((error)=>{
+  res.status(500).json({message:  'need to be logged in '})
+})
+
+})
+
   
     
   

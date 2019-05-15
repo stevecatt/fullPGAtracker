@@ -4,11 +4,11 @@ import './App.css';
 import Golf from './components/Golfscores'
 import Weather from './components/Weather'
 import Userpage from './components/Userpage'
-
 import Tabletest from './components/Tabletest'
 import Login from './components/Login'
 import Register from './components/Register'
 import FaveTable from './components/FaveTable';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class App extends Component {

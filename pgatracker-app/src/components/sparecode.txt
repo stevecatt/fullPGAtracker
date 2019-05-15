@@ -77,3 +77,29 @@ let g=this.state.favorites.map((p)=>{
    // console.log("this is outside",favorites)
 }
     
+
+
+    <div>
+              <Navbar></Navbar>
+               <NavbarBrand>PGA Tracker</NavbarBrand>
+               <NavbarToggler onClick={this.toggleNavbar} className="mr-2"></NavbarToggler>
+               <Collapse isOpen={!this.state.collapsed} navbar>
+               <Nav className="ml-auto" navbar>
+               <NavItem className="d-flex align-items-center">
+              <NavLink lassName="font-weight-bold topbar" to="/"> Homec </NavLink>
+              </NavItem>
+              <NavItem className="d-flex align-items-center">
+              {!this.props.isAuth ?<NavLink className="font-weight-bold topbar" to="/login"> login </NavLink>:null}
+              </NavItem>
+              {!this.props.isAuth ?<NavLink className="font-weight-bold topbar" to="/register"> Register</NavLink>:null}
+              {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/logout"> logout </NavLink>:null}
+                <NavLink className="font-weight-bold topbar" to="/schedule"> schedule </NavLink>
+                
+
+              {this.props.isAuth ?  <NavLink className="font-weight-bold topbar" to="/userpage"> User Page </NavLink>:null}
+              </Nav>
+              
+            </div>
+        )
+    }
+}

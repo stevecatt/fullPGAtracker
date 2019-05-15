@@ -130,7 +130,7 @@ class FaveTable extends Component {
       {Header: 'R',
       Cell: props =>{
         return(
-          <button className ="removeButton" onClick={()=>
+          <button className ="miniRemoveButton" onClick={()=>
           this.removeFavourite(props.original.player_id)}></button>
         )
       },
@@ -243,7 +243,7 @@ class FaveTable extends Component {
               <ReactTable
                 data={data}
                 columns={fullColumns}
-                noDataText="Login to view Favorites"
+                noDataText="Add Favorites"
                 minRows={0}
                 defaultPageSize = {5}
                 pageSizeOptions = {[5, 10, 150]}

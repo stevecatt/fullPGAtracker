@@ -98,10 +98,10 @@ class Tabletest extends Component {
 
     const mobColumns = [
       
-      {Header: 's',
+      {Header: 'S',
       Cell: props =>{
         return(
-          <button className ="saveButton" onClick={()=>
+          <button className ="miniSaveButton" onClick={()=>
           this.saveFavorite(props.original.player_id)}></button>
         )
       },
@@ -145,7 +145,7 @@ class Tabletest extends Component {
 
     const fullColumns = [
       
-      {Header: 'Actions',
+      {Header: 'Save',
       Cell: props =>{
         return(
           <button className ="saveButton" onClick={()=>

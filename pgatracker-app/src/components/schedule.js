@@ -39,6 +39,12 @@ class Schedule extends Component {
     .then(response => response.json())
     .then((json)=>{
       this.props.onHistorySelected(json)
+     // saves backups to database just in case  
+    //   axios.post(urls.saveBackup,{
+    //     title:json
+    // }).then((response)=>{
+    //   console.log(response)
+    // })
       console.log(json.leaderboard)
     }).then(()=>{
       this.props.history.push('/history')
@@ -87,7 +93,7 @@ class Schedule extends Component {
           {Header: 'View',
           Cell: props =>{
             return(
-              <button className ="minisaveButton" onClick={()=>
+              <button className ="miniSaveButton" onClick={()=>
               this.selectTournament(props.original.permNum,this.state.selectedOption.value)}></button>
             )
           },

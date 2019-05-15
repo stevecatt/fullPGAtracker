@@ -160,9 +160,11 @@ class Golf extends Component {
             </div>
          </div>
           
-            <h2>{this.props.golfScores.tournament_name}</h2>
+         <h3>{this.props.golfScores.tournament_name}</h3>
           
-            <h4>Round{this.props.golfScores.current_round}{this.props.golfScores.round_state}</h4>
+          <h4>Round{"   "}{this.props.golfScores.current_round}<h4>
+
+          </h4>Status:{"   "}{this.props.golfScores.round_state}</h4>
             {courses}
           
 

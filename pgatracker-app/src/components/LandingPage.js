@@ -83,6 +83,12 @@ class LandingPage extends Component {
         .then((json)=>{
           console.log(json.leaderboard)
           this.props.onGolfFetched(json)
+          //saves backup to database just in case
+        //   axios.post(urls.saveBackup,{
+        //     title:json
+        // }).then((response)=>{
+        //   console.log(response)
+        // })
         }).then(()=>{
           console.log("good enough for not logged in ")
         })
@@ -229,9 +235,11 @@ class LandingPage extends Component {
             </div>
          </div>
            
-            <h2>{this.props.golfScores.tournament_name}</h2>
+            <h3>{this.props.golfScores.tournament_name}</h3>
           
-            <h4>Round{this.props.golfScores.current_round}{this.props.golfScores.round_state}</h4>
+            <h4>Round{"   "}{this.props.golfScores.current_round}<h4>
+
+            </h4>Status:{"   "}{this.props.golfScores.round_state}</h4>
             {courses}
             <Breakpoint l down>
             <div>
