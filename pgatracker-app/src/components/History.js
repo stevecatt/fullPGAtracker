@@ -38,8 +38,8 @@ class History extends Component {
 
         const data = this.props.players
         let courses=this.props.courses.map((course)=>{
-            console.log("looking for course",course)
-            return <h4>{course.course_name}</h4>
+            //console.log("looking for course",course)
+            return <h4 key={course.course_id}>{course.course_name}</h4>
         })
 
         const mobColumns = [

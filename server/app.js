@@ -71,7 +71,7 @@ app.get('/hello', (req,res) => {
     // let firstName = req.body.firstName
     //let lastName= req.body.lastName
     let hash = bcrypt.hashSync(req.body.password, saltRounds)
-console.log(userName,hash)
+//console.log(userName,hash)
 
     db.one('SELECT EXISTS(SELECT user_name FROM users WHERE user_name = $1)', [userName])
     .then((user) => {
@@ -82,7 +82,7 @@ console.log(userName,hash)
         db.one('INSERT INTO users (user_name, hash) VALUES($1,$2) RETURNING id', [userName, hash])
         .then((added)=>{
           if(added){
-            console.log(added)
+           // console.log(added)
             res.json({success: true})
           }
           else {
@@ -103,7 +103,7 @@ app.post('/get-favorites',authenticate,(req,res)=>{
   .then((favorites)=>{
     res.json({favorites})
   })
-  console.log(user)
+  //console.log(user)
   //res.json({user})
 
 })
@@ -112,12 +112,12 @@ app.post('/get-favorites',authenticate,(req,res)=>{
 app.post('/remove-favorite',authenticate,(req,res)=>{
 let user = req.body.userId
 let pgaId = parseInt(req.body.playerId)
-console.log(user,pgaId)
+//console.log(user,pgaId)
 
 db.any('DELETE FROM favorite_golfers WHERE pga_id = $1 AND user_id = $2 RETURNING id',[pgaId,user])
 .then((deleted)=>{
   if (deleted){
-    console.log(deleted)
+    //console.log(deleted)
     res.json({message:"removed"})
   }
   
@@ -132,16 +132,16 @@ db.any('DELETE FROM favorite_golfers WHERE pga_id = $1 AND user_id = $2 RETURNIN
 //posting saved golfer
 
 app.post('/save-favorite',authenticate,(req,res)=>{
-console.log(req.body.playerId)
+//console.log(req.body.playerId)
 let user =req.body.userId
 let pgaId = parseInt(req.body.playerId)
-console.log(user,pgaId)
+//console.log(user,pgaId)
 
 db.one('INSERT INTO favorite_golfers (pga_id, user_id) VALUES($1,$2) RETURNING id', [pgaId, user])
 .then((success)=>{
-  console.log(success)
+  //console.log(success)
   if(success){
-    console.log(success)
+    //console.log(success)
     res.json({success: true,message:'weve added one'})
   }
   else {
@@ -168,9 +168,9 @@ db.one('INSERT INTO favorite_golfers (pga_id, user_id) VALUES($1,$2) RETURNING i
       .then((logger)=>{
         bcrypt.compare(req.body.password, logger.hash, function(err, result){
           if (result){
-            console.log(logger)
+            //console.log(logger)
             jwt.sign({ id:logger.id}, 'secret', function(err, token) {
-              console.log(token,logger.id)
+              //console.log(token,logger.id)
 
               if(token != false)  {
                 res.json({token: token,uid:logger.id})
@@ -181,8 +181,8 @@ db.one('INSERT INTO favorite_golfers (pga_id, user_id) VALUES($1,$2) RETURNING i
           });
           }else{
             res.json(result)
-            console.log("error coming back")
-            console.log(result)
+            //.log("error coming back")
+            //console.log(result)
           }
 
         })
@@ -193,7 +193,7 @@ db.one('INSERT INTO favorite_golfers (pga_id, user_id) VALUES($1,$2) RETURNING i
         
     
       else{
-        console.log("error")
+        //console.log("error")
        }
     })
   
@@ -207,9 +207,9 @@ db.one('INSERT INTO favorite_golfers (pga_id, user_id) VALUES($1,$2) RETURNING i
   
     db.one('INSERT INTO backup_json (saved_json) VALUES($1) RETURNING id', [title])
 .then((success)=>{
-  console.log(success)
+  //console.log(success)
   if(success){
-    console.log(success)
+    //console.log(success)
     res.json({success: true,message:'weve added one'})
   }
   else {

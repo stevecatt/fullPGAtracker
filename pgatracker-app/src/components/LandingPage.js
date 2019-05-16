@@ -43,9 +43,9 @@ class LandingPage extends Component {
 
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption)
-    console.log("this is from the selector box")
-    console.log(this.state.selectedOption.value)
+    // console.log(`Option selected:`, selectedOption)
+    // console.log("this is from the selector box")
+    // console.log(this.state.selectedOption.value)
     this.props.onTourSelected(selectedOption.value)
     let tour = selectedOption.value
     this.golfFetched(tour)
@@ -53,15 +53,15 @@ class LandingPage extends Component {
    //this.props.onSchedualFetched(selectedOption.value)
   }
 
-  scheduleFetched = (tour) =>{
-    let url = 'https://statdata.pgatour.com/'+tour+'/current/schedule-v2.json'
-    fetch(url)
-    .then(schedule => schedule.json())
-    .then((sched)=>{
-      console.log("this is tour schedule",sched)
+  // scheduleFetched = (tour) =>{
+  //   let url = 'https://statdata.pgatour.com/'+tour+'/current/schedule-v2.json'
+  //   fetch(url)
+  //   .then(schedule => schedule.json())
+  //   .then((sched)=>{
+  //     //console.log("this is tour schedule",sched)
 
-    })
-  }
+  //   })
+  // }
 
 
   golfFetched = (tour) => {
@@ -74,14 +74,14 @@ class LandingPage extends Component {
       fetch (url)
       .then(resp=> resp.json()) 
       .then((json)=>{
-        console.log (json.tid)
+        //console.log (json.tid)
         let tourId=json.tid
         //let url = "https://statdata/pgattour.com/r/480/leaderboard-v2mini.json"
         let url = "https://statdata.pgatour.com/"+tour+"/"+tourId+"/leaderboard-v2mini.json"
         fetch(url)
         .then(response => response.json())
         .then((json)=>{
-          console.log(json.leaderboard)
+          //console.log(json.leaderboard)
           this.props.onGolfFetched(json)
           //saves backup to database just in case
         //   axios.post(urls.saveBackup,{
@@ -90,7 +90,7 @@ class LandingPage extends Component {
         //   console.log(response)
         // })
         }).then(()=>{
-          console.log("good enough for not logged in ")
+          //console.log("good enough for not logged in ")
         })
       })
     
@@ -107,8 +107,12 @@ class LandingPage extends Component {
         this.interval = setInterval(()=>{
           //gonna fire this when status of game is active 
          console.log("how do i set the interval")
+         if(this.props.golfScores.round_state =="In Progress"){
+           console.log ("game on")
+           this.golfFetched(tour)
+         }
 
-        },5000)
+        },300000)
         
         
       }
@@ -215,8 +219,8 @@ class LandingPage extends Component {
         
       ]
       let courses=this.props.courses.map((course)=>{
-        console.log("looking for course",course)
-        return <h4>{course.course_name}</h4>
+        //console.log("looking for course",course)
+        return <h4 key={course.course_id}>{course.course_name}</h4>
       })
       const { selectedOption } = this.state;
         return (
@@ -237,9 +241,9 @@ class LandingPage extends Component {
            
             <h3>{this.props.golfScores.tournament_name}</h3>
           
-            <h4>Round{"   "}{this.props.golfScores.current_round}<h4>
+            <h4>Round{"   "}{this.props.golfScores.current_round}</h4>
 
-            </h4>Status:{"   "}{this.props.golfScores.round_state}</h4>
+            <h4>Status:{"   "}{this.props.golfScores.round_state}</h4>
             {courses}
             <Breakpoint l down>
             <div>

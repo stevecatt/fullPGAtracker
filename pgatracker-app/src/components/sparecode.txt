@@ -103,3 +103,22 @@ let g=this.state.favorites.map((p)=>{
         )
     }
 }
+
+
+.miniRemoveButton {
+  background-color:darkgray;
+  color: #F1373D;
+  border-radius:50%;
+  padding:5px
+}
+
+.miniSaveButton {
+  background-color:darkgray;
+  color: #076652;
+  border-radius:50%;
+  padding: 5px 
+}
+
+.navbar-light {
+  color:green
+}

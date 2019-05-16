@@ -35,12 +35,12 @@ class Golf extends Component {
         uid:this.props.uid
     })
     .then(response =>{
-        console.log(response.data.favorites)
+        //console.log(response.data.favorites)
        
         let ids = response.data.favorites
         let i=0
         for(i=0;i<ids.length;i++){
-            console.log(ids[i].pga_id)
+           // console.log(ids[i].pga_id)
             
             
             let favoritepush= this.props.players.filter(player=>player.player_id == ids[i].pga_id)
@@ -49,7 +49,7 @@ class Golf extends Component {
 
             }
            
-            console.log(favoritepush)
+           // console.log(favoritepush)
             
             
 
@@ -63,32 +63,32 @@ class Golf extends Component {
 
    
     }).then(()=>{
-      console.log("sent the favorites")
+     // console.log("sent the favorites")
     })
    // console.log("this is outside",favorites)
 }
 
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption)
-    console.log("this is from the selector box")
-    console.log(this.state.selectedOption.value)
+    // console.log(`Option selected:`, selectedOption)
+    // console.log("this is from the selector box")
+    // console.log(this.state.selectedOption.value)
     this.props.onTourSelected(selectedOption.value)
     let tour = selectedOption.value
     this.golfFetched(tour)
     //this.getUserFavorites()
    //this.props.onSchedualFetched(selectedOption.value)
   }
+  // moved to action creators
+  // scheduleFetched = (tour) =>{
+  //   let url = 'https://statdata.pgatour.com/'+tour+'/current/schedule-v2.json'
+  //   fetch(url)
+  //   .then(schedule => schedule.json())
+  //   .then((sched)=>{
+  //    // console.log("this is tour schedule",sched)
 
-  scheduleFetched = (tour) =>{
-    let url = 'https://statdata.pgatour.com/'+tour+'/current/schedule-v2.json'
-    fetch(url)
-    .then(schedule => schedule.json())
-    .then((sched)=>{
-      console.log("this is tour schedule",sched)
-
-    })
-  }
+  //   })
+  // }
 
 
   golfFetched = (tour) => {
@@ -101,13 +101,13 @@ class Golf extends Component {
       fetch (url)
       .then(resp=> resp.json()) 
       .then((json)=>{
-        console.log (json.tid)
+       // console.log (json.tid)
         let tourId=json.tid
         let url = "https://statdata.pgatour.com/"+tour+"/"+tourId+"/leaderboard-v2mini.json"
         fetch(url)
         .then(response => response.json())
         .then((json)=>{
-          console.log(json.leaderboard)
+         // console.log(json.leaderboard)
           this.props.onGolfFetched(json)
         }).then(()=>{
           this.getUserFavorites()
@@ -126,9 +126,14 @@ class Golf extends Component {
         this.props.onSchedualFetched()
         this.interval = setInterval(()=>{
           //gonna fire this when status of game is active 
-         console.log("how do i set the interval")
+         //console.log("how do i set the interval")
 
-        },5000)
+         if(this.props.golfScores.round_state =="In Progress"){
+          console.log ("game on")
+          this.golfFetched(tour)
+        }
+
+       },300000)
         
         
       }
@@ -140,8 +145,8 @@ class Golf extends Component {
 
     render(){
       let courses=this.props.courses.map((course)=>{
-        console.log("looking for course",course)
-        return <h4>{course.course_name}</h4>
+        //console.log("looking for course",course)
+        return <h4 key={course.course_id}>{course.course_name}</h4>
       })
       const { selectedOption } = this.state;
         return (
@@ -162,9 +167,9 @@ class Golf extends Component {
           
          <h3>{this.props.golfScores.tournament_name}</h3>
           
-          <h4>Round{"   "}{this.props.golfScores.current_round}<h4>
+          <h4>Round{"   "}{this.props.golfScores.current_round}</h4>
 
-          </h4>Status:{"   "}{this.props.golfScores.round_state}</h4>
+          <h4>Status:{"   "}{this.props.golfScores.round_state}</h4>
             {courses}
           
 

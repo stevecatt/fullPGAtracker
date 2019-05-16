@@ -10,6 +10,7 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 import { setDefaultBreakpoints } from 'react-socks';
+import {Button} from 'reactstrap'
 
 setDefaultBreakpoints([
   { xs: 0 },
@@ -33,7 +34,7 @@ class Schedule extends Component {
   }
   selectTournament=(tourId,tour)=>{
     //gets tid and tour id then feeds a history table
-    console.log("fired",tourId,tour)
+    //console.log("fired",tourId,tour)
     let url = "https://statdata.pgatour.com/"+tour+"/"+tourId+"/leaderboard-v2mini.json"
     fetch(url)
     .then(response => response.json())
@@ -45,7 +46,7 @@ class Schedule extends Component {
     // }).then((response)=>{
     //   console.log(response)
     // })
-      console.log(json.leaderboard)
+      //console.log(json.leaderboard)
     }).then(()=>{
       this.props.history.push('/history')
     })
@@ -64,8 +65,8 @@ class Schedule extends Component {
     
       handleChange = (selectedOption) => {
         this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption)
-        console.log(selectedOption.value)
+        //console.log(`Option selected:`, selectedOption)
+        //console.log(selectedOption.value)
         this.props.onTourSelected(selectedOption.value)
 
       }
@@ -93,8 +94,8 @@ class Schedule extends Component {
           {Header: 'View',
           Cell: props =>{
             return(
-              <button className ="miniSaveButton" onClick={()=>
-              this.selectTournament(props.original.permNum,this.state.selectedOption.value)}></button>
+              <Button style ={{padding:'2px 7px 0'}} className ="miniSaveButton btn btn-success" onClick={()=>
+              this.selectTournament(props.original.permNum,this.state.selectedOption.value)}>*</Button>
             )
           },
           maxWidth:50,
@@ -120,7 +121,7 @@ class Schedule extends Component {
           
           
           {
-            Header:'',
+            Header:'Champion',
             accessor:'champions[0].playerName.last',
             filterable: true,
             maxWidth:150,
@@ -137,8 +138,8 @@ class Schedule extends Component {
             {Header: 'View',
             Cell: props =>{
               return(
-                <button  className ="SaveButton" onClick={()=>
-                this.selectTournament(props.original.permNum,this.state.selectedOption.value)}>View</button>
+                <Button  className ="SaveButton btn btn-success" onClick={()=>
+                this.selectTournament(props.original.permNum,this.state.selectedOption.value)}>View</Button>
               )
             },
             maxWidth:75,

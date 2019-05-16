@@ -11,7 +11,8 @@ class Register extends Component {
             firstName: "",
             lastName: "",
             userName: "",
-            password: ""
+            password: "",
+            message: ""
 
         }
 
@@ -44,6 +45,12 @@ class Register extends Component {
       .then(response =>  {
           if(response.data.exists) {
             console.log("user exists")
+            let message= response.data.exists
+            this.setState({
+              message:"Sorry Username Exists"
+            })
+
+
             
             
           } else if (response.data.success){
@@ -64,6 +71,7 @@ class Register extends Component {
             <div className="container">
             <div>
             <h1>Register</h1>
+            <h2>{this.state.message}</h2>
             
             <input type="text" onChange={this.handleTextBoxChange} placeholder="user name" name="userName" />
             <input type="password" onChange={this.handleTextBoxChange} placeholder="password" name="password" />

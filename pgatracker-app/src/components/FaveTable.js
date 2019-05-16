@@ -10,6 +10,7 @@ import * as urls from '../utils/urls';
 import * as funcs from '../utils/dataFunctions'
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 import { setDefaultBreakpoints } from 'react-socks';
+import {Button} from "reactstrap"
 
 setDefaultBreakpoints([
   { xs: 0 },
@@ -35,7 +36,7 @@ class FaveTable extends Component {
         uid:this.props.uid
     })
     .then(response =>{
-        console.log(response.data.favorites)
+        //.log(response.data.favorites)
        
         let ids = response.data.favorites
         let i=0
@@ -70,7 +71,7 @@ class FaveTable extends Component {
 
 //use this to remove the pid to database
   removeFavourite= (id) => {
-    console.log(id,this.props.uid)
+    //console.log(id,this.props.uid)
     axios.post(urls.removeFavorite ,{
       playerId : id,
       userId: this.props.uid
@@ -87,21 +88,11 @@ class FaveTable extends Component {
     //  this.props.onFavSelected(this.state.favorites)
 
 
-      console.log(response)
+     // console.log(response)
     })
   }
   
   
-
-
-  // customFilter = (filter, row) => {
-  //   const id = filter.pivotId || filter.id;
-  //   if (row[id] !== null && typeof row[id] === "string") {
-  //     return (row[id] !== undefined
-  //       ? String(row[id].toLowerCase()).includes(filter.value.toLowerCase())
-  //       : true);
-  //   }
-  // }
   
   render() {
 
@@ -130,8 +121,8 @@ class FaveTable extends Component {
       {Header: 'R',
       Cell: props =>{
         return(
-          <button className ="miniRemoveButton" onClick={()=>
-          this.removeFavourite(props.original.player_id)}></button>
+          <Button style ={{padding:'2px 7px 0'}} className ="miniRemoveButton btn btn-danger" onClick={()=>
+          this.removeFavourite(props.original.player_id)}>*</Button>
         )
       },
       maxWidth:50,
@@ -177,8 +168,8 @@ class FaveTable extends Component {
       {Header: 'Remove',
       Cell: props =>{
         return(
-          <button className ="removeButton" onClick={()=>
-          this.removeFavourite(props.original.player_id)}>Delete</button>
+          <Button className ="removeButton btn btn-danger" onClick={()=>
+          this.removeFavourite(props.original.player_id)}>Remove</Button>
         )
       }
     },

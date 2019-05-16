@@ -45,7 +45,7 @@ h2 {color:#D3BC8D}
 h3 {color:#D3BC8D}
 h4 {color:#003C80}
 h5 {color:#D3BC8D}
-a:link {color:#F1373D}
+a:link {color:#076652}
 a:visited{color:#076652}
 a:hover{color:#003C80}
 
@@ -54,17 +54,6 @@ input {
  
   }
 
-.miniRemoveButton {
-  background-color:darkgray;
-  color: #F1373D;
-  border-radius:50%
-}
-
-.miniSaveButton {
-  background-color:darkgray;
-  color: #076652;
-  border-radius:50%
-}
 
 @keyframes App-logo-spin {
   from {

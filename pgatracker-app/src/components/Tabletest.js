@@ -4,6 +4,7 @@ import axios from 'axios'
 import * as actionTypes from '../store/actions/actionTypes'
 import * as urls from '../utils/urls'
 import * as funcs from '../utils/dataFunctions'
+import { Button } from 'reactstrap'
 
 
 import ReactTable from "react-table";
@@ -35,12 +36,12 @@ class Tabletest extends Component {
         uid:this.props.uid
     })
     .then(response =>{
-        console.log(response.data.favorites)
+        //console.log(response.data.favorites)
        
         let ids = response.data.favorites
         let i=0
         for(i=0;i<ids.length;i++){
-            console.log(ids[i].pga_id)
+            //console.log(ids[i].pga_id)
             
             
             let favoritepush= this.props.players.filter(player=>player.player_id == ids[i].pga_id)
@@ -49,7 +50,7 @@ class Tabletest extends Component {
 
             }
            
-            console.log(favoritepush)
+            //console.log(favoritepush)
             
             
 
@@ -68,7 +69,7 @@ class Tabletest extends Component {
 
 // use this to save the pid to database
   saveFavorite= (id) => {
-    console.log(id)
+    //console.log(id)
     axios.post(urls.saveFavorite,{
       playerId : id,
       userId: this.props.uid
@@ -76,7 +77,7 @@ class Tabletest extends Component {
     }).then(response =>{
       //add a function to select the players from the api. hopefully
       this.getUserFavorites()
-      console.log(response)
+      //console.log(response)
     })
   }
   
@@ -94,15 +95,15 @@ class Tabletest extends Component {
   
   render() {
     const data = this.props.players
-    console.log(this.props.players)
+    //console.log(this.props.players)
 
     const mobColumns = [
       
       {Header: 'S',
       Cell: props =>{
         return(
-          <button className ="miniSaveButton" onClick={()=>
-          this.saveFavorite(props.original.player_id)}></button>
+          <Button style ={{padding:'2px 7px 0'}} className ="miniSaveButton btn btn-success" onClick={()=>
+          this.saveFavorite(props.original.player_id)}>*</Button>
         )
       },
       maxWidth:50,
@@ -148,8 +149,8 @@ class Tabletest extends Component {
       {Header: 'Save',
       Cell: props =>{
         return(
-          <button className ="saveButton" onClick={()=>
-          this.saveFavorite(props.original.player_id)}>Save</button>
+          <Button className ="saveButton btn btn-success" onClick={()=>
+          this.saveFavorite(props.original.player_id)}>Save</Button>
         )
       }
     },

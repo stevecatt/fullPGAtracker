@@ -11,7 +11,8 @@ class Login extends Component {
         super()
         this.state={
             userName: "",
-            password:""
+            password:"",
+            message:""
            
 
         }
@@ -51,7 +52,12 @@ class Login extends Component {
           this.props.onTokenRecieved(token,uid)
           setAuthenticationHeader(token)
           this.props.history.push('/userpage')
-          }else{console.log("you messed up")}
+          }else{
+            this.setState({
+              message:"Incorrect Username or Password"
+            })
+          }
+          
         })
         // .then(result => {
         //     if(result===true) {
@@ -78,6 +84,7 @@ class Login extends Component {
             <div className="container">
                <div>
                <h1>Login</h1>
+               <h2>{this.state.message}</h2>
                 <input type="text" onChange={this.handleTextBoxChange} placeholder="user name" name="userName" />
                 <input type="password" onChange={this.handleTextBoxChange} placeholder="password" name="password" />
                 </div>

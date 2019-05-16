@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import {Link,} from 'react-router-dom'
+import { NavLink as RRNavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Fragment } from 'react';
 import Selector from './Selector'
@@ -52,23 +53,23 @@ class Menu extends Component {
     render(){
         return(
           <div className="container">
-        <Navbar  light expand="md">
-          <NavbarBrand><Link to="/"> Home</Link></NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+        <Navbar  light style={{color:'#076652'}} expand="md">
+          <NavbarBrand style={{color:'#076652'}} tag={RRNavLink} to="/"> Home</NavbarBrand>
+          <NavbarToggler style={{color:'#076652'}} onClick={this.toggle} />
+          <Collapse style={{color:'#076652'}} isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-            <NavItem><NavLink className="font-weight-bold topbar"><Link to="/schedule"> Schedule</Link> </NavLink></NavItem>
+            <NavItem><NavLink style={{color:'#076652'}} tag={RRNavLink} className="font-weight-bold topbar" to="/schedule"> Schedule </NavLink></NavItem>
               <NavItem>
-              {this.props.isAuth ?  <NavLink className="font-weight-bold topbar"><Link to="/userpage"> Favorites </Link></NavLink>:null}
+              {this.props.isAuth ?  <NavLink style={{color:'#076652'}} tag={RRNavLink} className="font-weight-bold topbar"to="/userpage"> Favorites </NavLink>:null}
               </NavItem>
               <NavItem>
-              {!this.props.isAuth ?<NavLink className="font-weight-bold topbar"><Link to="/login"> login</Link></NavLink>:null}
+              {!this.props.isAuth ?<NavLink style={{color:'#076652'}} tag={RRNavLink} className="font-weight-bold topbar" to="/login"> login</NavLink>:null}
               </NavItem>
               <NavItem>
-              {this.props.isAuth ?  <NavLink className="font-weight-bold topbar"><Link to="/logout"> logout </Link></NavLink>:null}
+              {this.props.isAuth ?  <NavLink style={{color:'#076652'}} tag={RRNavLink} className="font-weight-bold topbar"to="/logout"> logout </NavLink>:null}
               </NavItem>
               <NavItem>
-              {!this.props.isAuth ?<NavLink className="font-weight-bold topbar"><Link to="/register"> Register</Link></NavLink>:null}
+              {!this.props.isAuth ?<NavLink style={{color:'#076652'}} tag={RRNavLink} className="font-weight-bold topbar" to="/register"> Register</NavLink>:null}
               </NavItem>
               
             </Nav>

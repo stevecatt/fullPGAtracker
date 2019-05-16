@@ -32,7 +32,7 @@ export const scheduleFetched =() =>{
     fetch ('https://statdata.pgatour.com/r/current/schedule-v2.json')
     .then(response => response.json())
     .then((shed)=> {
-      console.log(shed)
+      //console.log(shed)
       dispatch({type:actionTypes.GOLF_SCHEDULE_FETCHED , schedule: shed, pga: shed.years[0].tours[0].trns, champ:shed.years[0].tours[1].trns, web: shed.years[0].tours[2].trns, latino:shed.years[0].tours[3].trns, canada:shed.years[0].tours[4].trns })
     })
   }
