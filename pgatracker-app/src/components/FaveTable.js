@@ -150,6 +150,11 @@ class FaveTable extends Component {
         accessor: 'player_bio.last_name',
         filterable: true
       },
+      {
+        Header: 'Thru',
+        accessor: 'thru',
+        filterable: false
+      },
       
       
       {
@@ -182,6 +187,14 @@ class FaveTable extends Component {
         )
       }
       },
+      {
+        Header:'Nationality',
+        accessor: 'player_bio.country',
+        style:{
+          textAlign:"center"
+        }
+
+    },
         {
         Header:'Position',
         accessor: 'current_position',

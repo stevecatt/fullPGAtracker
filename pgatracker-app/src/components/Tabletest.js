@@ -131,6 +131,11 @@ class Tabletest extends Component {
         accessor: 'player_bio.last_name',
         filterable: true
       },
+      {
+        Header: 'Thru',
+        accessor: 'thru',
+        filterable: false
+      },
       
       
       {
@@ -163,6 +168,14 @@ class Tabletest extends Component {
         )
       }
       },
+      {
+        Header:'Nationality',
+        accessor: 'player_bio.country',
+        style:{
+          textAlign:"center"
+        }
+
+    },
         {
         Header:'Position',
         accessor: 'current_position',

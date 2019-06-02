@@ -151,7 +151,11 @@ class LandingPage extends Component {
           accessor: 'player_bio.last_name',
           filterable: true
         },
-        
+        {
+          Header: 'Thru',
+          accessor: 'thru',
+          filterable: false
+        },
         
         {
           Header: 'Total',
@@ -175,6 +179,15 @@ class LandingPage extends Component {
           )
         }
         },
+        {
+          Header:'Nationality',
+          accessor: 'player_bio.country',
+          style:{
+            textAlign:"center"
+          }
+  
+      },
+
           {
           Header:'Position',
           accessor: 'current_position',
@@ -183,6 +196,7 @@ class LandingPage extends Component {
           }
   
       },
+     
           {
           Header: 'First Name',
           accessor: 'player_bio.first_name',
