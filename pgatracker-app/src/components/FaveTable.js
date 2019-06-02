@@ -190,8 +190,10 @@ class FaveTable extends Component {
       {
         Header:'Nationality',
         accessor: 'player_bio.country',
+        filterable: true,
         style:{
-          textAlign:"center"
+          textAlign:"center",
+          
         }
 
     },
