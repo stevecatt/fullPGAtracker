@@ -134,36 +134,51 @@ class LandingPage extends Component {
           {
           Header:'Pos',
           accessor: 'current_position',
-          maxWidth: 50,
+          maxWidth: 35,
           style:{
-            textAlign:"center"
+            textAlign:"center",
+          
+            
           }
   
       },
           {
-          Header: 'First Name',
+          Header: '',
           accessor: 'player_bio.short_name',
-          maxWidth: 50,
+          maxWidth: 30,
           filterable: true
         },
         {
           Header: 'Last Name',
           accessor: 'player_bio.last_name',
-          filterable: true
+          filterable: true,
+          
         },
         {
-          Header: 'Thru',
+          Header: 'Tru',
           accessor: 'thru',
           filterable: false,
-          maxWidth:50,
+          maxWidth:35,
         },
         
         {
-          Header: 'Total',
+          Header: 'Tot',
           accessor: 'total',
-          maxWidth: 50,
+          maxWidth: 35,
           style:{
             textAlign:"center"
+          }
+        },
+
+        {
+          Header: 'Rank',
+          
+          accessor: 'rankings.cup_rank',
+          maxWidth:60,
+          style:{
+            textAlign:"center",
+          
+          
           }
         },
         
@@ -236,9 +251,11 @@ class LandingPage extends Component {
 
         {
           Header: 'Cup Rank',
+          
           accessor: 'rankings.cup_rank',
           style:{
-            textAlign:"center"
+            textAlign:"center",
+          
           }
         },
         
@@ -271,10 +288,11 @@ class LandingPage extends Component {
             <h4>Status:{"   "}{this.props.golfScores.round_state}</h4>
             {courses}
             <Breakpoint l down>
-            <div>
+            <div className="mob-table">
             <ReactTable
+                
                 data={data}
-                columns={mobColumns}
+                columns={mobColumns} 
                 defaultPageSize = {10}
                 pageSizeOptions = {[10, 20, 50]}
                 showPaginationTop
@@ -289,7 +307,7 @@ class LandingPage extends Component {
             </Breakpoint>
             <Breakpoint l up>
             <div>
-              <ReactTable
+              <ReactTable 
                 data={data}
                 columns={fullColumns}
                 defaultPageSize = {10}

@@ -23,6 +23,11 @@
   color: #61dafb;
 }
 
+.mob-table {
+  font-size:12px;
+  max-width: 350px;
+}
+
 img {
   border-radius: 50%;
   width: 50px;

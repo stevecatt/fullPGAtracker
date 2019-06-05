@@ -111,42 +111,56 @@ class Tabletest extends Component {
 
 
       
-        {
-        Header:'Pos',
-        accessor: 'current_position',
-        maxWidth:50,
-        style:{
-          textAlign:"center"
-        }
+    {
+      Header:'Pos',
+      accessor: 'current_position',
+      maxWidth: 35,
+      style:{
+        textAlign:"center",
+      
+        
+      }
 
+  },
+      {
+      Header: '',
+      accessor: 'player_bio.short_name',
+      maxWidth: 30,
+      filterable: true
     },
-        {
-        Header: 'First Name',
-        accessor: 'player_bio.short_name',
-        maxWidth:50,
-        filterable: true
-      },
-      {
-        Header: 'Last Name',
-        accessor: 'player_bio.last_name',
-        filterable: true
-      },
-      {
-        Header: 'Thru',
-        accessor: 'thru',
-        filterable: false,
-        maxWidth:50,
-      },
+    {
+      Header: 'Last Name',
+      accessor: 'player_bio.last_name',
+      filterable: true,
+      
+    },
+    {
+      Header: 'Tru',
+      accessor: 'thru',
+      filterable: false,
+      maxWidth:35,
+    },
+    
+    {
+      Header: 'Tot',
+      accessor: 'total',
+      maxWidth: 35,
+      style:{
+        textAlign:"center"
+      }
+    },
+
+    {
+      Header: 'Rank',
+      
+      accessor: 'rankings.cup_rank',
+      maxWidth:60,
+      style:{
+        textAlign:"center",
       
       
-      {
-        Header: 'Total',
-        accessor: 'total',
-        maxWidth:50,
-        style:{
-          textAlign:"center"
-        }
-      },
+      }
+    },
       
     ]
 
@@ -247,6 +261,7 @@ class Tabletest extends Component {
               />
               </Breakpoint>
                <Breakpoint l down>
+               <div className="mob-table">
                <ReactTable
                 data={data}
                 columns={mobColumns}
@@ -256,6 +271,7 @@ class Tabletest extends Component {
                 showPaginationBottom = {false}
                 defaultFilterMethod={funcs.customFilter}
               />
+              </div>
                </Breakpoint>
           </div>      
     )
