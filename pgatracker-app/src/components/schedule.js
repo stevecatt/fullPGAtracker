@@ -105,20 +105,15 @@ class Schedule extends Component {
           
          
             {
-            Header:'Tournament Name',
+            Header:'Tournament',
             accessor: 'trnName.short',
+            filterable: true,
             style:{
               textAlign:"center"
             }
     
         },
-            {
-            Header: 'Start Date',
-            accessor: 'date.start',
-            maxWidth:100,
-            filterable: true
-          },
-          
+            
           
           {
             Header:'Champion',
@@ -215,6 +210,7 @@ class Schedule extends Component {
             />
            </Breakpoint>
            <Breakpoint l down>
+           <div className="mob-table">
             <ReactTable 
               data={data}
               columns={mobColumns}
@@ -224,6 +220,7 @@ class Schedule extends Component {
               showPaginationBottom = {false}
               defaultFilterMethod={this.customFilter}
             />
+            </div>
            </Breakpoint>
         </div>      
         )
