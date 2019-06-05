@@ -154,7 +154,8 @@ class LandingPage extends Component {
         {
           Header: 'Thru',
           accessor: 'thru',
-          filterable: false
+          filterable: false,
+          maxWidth:50,
         },
         
         {
@@ -228,6 +229,14 @@ class LandingPage extends Component {
         {
           Header: 'Total',
           accessor: 'total',
+          style:{
+            textAlign:"center"
+          }
+        },
+
+        {
+          Header: 'Cup Rank',
+          accessor: 'rankings.cup_rank',
           style:{
             textAlign:"center"
           }
