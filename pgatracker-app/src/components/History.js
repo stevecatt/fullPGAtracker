@@ -158,8 +158,8 @@ class History extends Component {
             <h2>{this.props.golfScores.tour_name}</h2>
             <h3>{this.props.golfScores.tournament_name}</h3>
           
-            <h4>Round{"  "}{this.props.golfScores.current_round}</h4>
-            <h4>Status:{"  "}{this.props.golfScores.round_state}</h4>
+            
+            <h4>End Date:{"  "}{this.props.golfScores.end_date}</h4>
             {courses}
             <Breakpoint m up>
             
