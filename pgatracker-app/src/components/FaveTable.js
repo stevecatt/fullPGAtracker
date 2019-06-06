@@ -125,7 +125,7 @@ class FaveTable extends Component {
           this.removeFavourite(props.original.player_id)}>*</Button>
         )
       },
-      maxWidth:50,
+      maxWidth:30,
     },
 
 
@@ -144,13 +144,18 @@ class FaveTable extends Component {
       {
       Header: '',
       accessor: 'player_bio.short_name',
-      maxWidth: 30,
-      filterable: true
+      maxWidth: 20,
+      
     },
     {
       Header: 'Last Name',
       accessor: 'player_bio.last_name',
+      maxWidth:75,
       filterable: true,
+      style:{
+        textAlign:"left"
+
+      },
       
     },
     {
@@ -164,6 +169,7 @@ class FaveTable extends Component {
       Header: 'Tot',
       accessor: 'total',
       maxWidth: 35,
+      filterable: true,
       style:{
         textAlign:"center"
       }
@@ -173,13 +179,20 @@ class FaveTable extends Component {
       Header: 'Rank',
       
       accessor: 'rankings.cup_rank',
-      maxWidth:60,
+      maxWidth:50,
       style:{
         textAlign:"center",
       
       
       }
     },
+    {Header:'Proj',
+    accessor:'rankings.projected_cup_rank',
+    maxWidth:50,
+    style:{
+      textAlign:"center"
+    }
+  },
       
     ]
 
@@ -260,6 +273,13 @@ class FaveTable extends Component {
           textAlign:"center"
         }
       },
+      {Header:'Proj Rank',
+      accessor:'rankings.projected_cup_rank',
+      style:{
+        textAlign:"center"
+      }
+    },
+      
       
     ]
   

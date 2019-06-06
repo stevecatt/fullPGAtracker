@@ -146,12 +146,16 @@ class LandingPage extends Component {
           Header: '',
           accessor: 'player_bio.short_name',
           maxWidth: 30,
-          filterable: true
+          
         },
         {
           Header: 'Last Name',
           accessor: 'player_bio.last_name',
+          maxWidth:75,
           filterable: true,
+          style:{
+            textAlign:"left"
+          }
           
         },
         {
@@ -174,13 +178,20 @@ class LandingPage extends Component {
           Header: 'Rank',
           
           accessor: 'rankings.cup_rank',
-          maxWidth:60,
+          maxWidth:50,
           style:{
             textAlign:"center",
           
           
           }
         },
+        {Header:'Proj',
+        accessor:'rankings.projected_cup_rank',
+        maxWidth:50,
+        style:{
+          textAlign:"center"
+        }
+      },
         
       ]
 
@@ -258,6 +269,12 @@ class LandingPage extends Component {
           
           }
         },
+        {Header:'Proj Rank',
+          accessor:'rankings.projected_cup_rank',
+          style:{
+            textAlign:"center"
+          }
+      },
         
       ]
       let courses=this.props.courses.map((course)=>{

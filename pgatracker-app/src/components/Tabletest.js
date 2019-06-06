@@ -106,7 +106,7 @@ class Tabletest extends Component {
           this.saveFavorite(props.original.player_id)}>*</Button>
         )
       },
-      maxWidth:50,
+      maxWidth:30,
     },
 
 
@@ -126,12 +126,16 @@ class Tabletest extends Component {
       Header: '',
       accessor: 'player_bio.short_name',
       maxWidth: 30,
-      filterable: true
+     
     },
     {
       Header: 'Last Name',
       accessor: 'player_bio.last_name',
       filterable: true,
+      maxWidth:75,
+      style:{
+        textAlign:'left'
+      }
       
     },
     {
@@ -154,11 +158,18 @@ class Tabletest extends Component {
       Header: 'Rank',
       
       accessor: 'rankings.cup_rank',
-      maxWidth:60,
+      maxWidth:50,
       style:{
         textAlign:"center",
       
       
+      }
+    },
+    {Header:'Proj',
+      accessor:'rankings.projected_cup_rank',
+      maxWidth:50,
+      style:{
+        textAlign:"center"
       }
     },
       
@@ -243,6 +254,12 @@ class Tabletest extends Component {
           textAlign:"center"
         }
       },
+      {Header:'Proj Rank',
+      accessor:'rankings.projected_cup_rank',
+      style:{
+        textAlign:"center"
+      }
+    },
       
     ]
   
