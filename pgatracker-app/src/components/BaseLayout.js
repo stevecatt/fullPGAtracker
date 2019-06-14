@@ -30,20 +30,20 @@ setDefaultBreakpoints([
 class Menu extends Component {
   constructor(){
     super()
-    this.toggle = this.toggle.bind(this);
+    //this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
       collapsed: true
     };
   }
 
-  toggle() {
+  toggle=()=> {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
 
-  toggleNavbar() {
+  toggleNavbar=()=>{
     this.setState({
       collapsed: !this.state.collapsed
     });

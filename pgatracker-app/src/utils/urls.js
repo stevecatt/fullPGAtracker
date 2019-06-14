@@ -22,3 +22,6 @@ export const golfTours = [
    
   ];
 
+ // "https://statdata.pgatour.com/h/stats/2019/02668.json" //web points
+ // "https://statdata.pgatour.com/r/stats/2019/02671.json" //fedex points
+ //"https://statdata.pgatour.com/m/stats/2019/109.json"//latin points

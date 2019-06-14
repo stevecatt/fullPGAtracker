@@ -47,34 +47,54 @@ class History extends Component {
   
         
         
-            {
+          {
             Header:'Pos',
             accessor: 'current_position',
-            maxWidth: 50,
+            maxWidth: 35,
             style:{
-              textAlign:"center"
+              textAlign:"center",
+            
+              
             }
     
         },
             {
-            Header: 'First Name',
+            Header: '',
             accessor: 'player_bio.short_name',
-            maxWidth: 50,
+            maxWidth: 30,
             filterable: true
           },
           {
             Header: 'Last Name',
             accessor: 'player_bio.last_name',
-            filterable: true
+            filterable: true,
+            
+          },
+          {
+            Header: 'Tru',
+            accessor: 'thru',
+            filterable: false,
+            maxWidth:35,
           },
           
-          
           {
-            Header: 'Total',
+            Header: 'Tot',
             accessor: 'total',
-            maxWidth: 50,
+            maxWidth: 35,
             style:{
               textAlign:"center"
+            }
+          },
+  
+          {
+            Header: 'Rank',
+            
+            accessor: 'rankings.cup_rank',
+            maxWidth:60,
+            style:{
+              textAlign:"center",
+            
+            
             }
           },
           
@@ -138,8 +158,8 @@ class History extends Component {
             <h2>{this.props.golfScores.tour_name}</h2>
             <h3>{this.props.golfScores.tournament_name}</h3>
           
-            <h4>Round{"  "}{this.props.golfScores.current_round}</h4>
-            <h4>Status:{"  "}{this.props.golfScores.round_state}</h4>
+            
+            <h4>End Date:{"  "}{this.props.golfScores.end_date}</h4>
             {courses}
             <Breakpoint m up>
             
@@ -154,7 +174,7 @@ class History extends Component {
               />
               </Breakpoint>
               <Breakpoint m down>
-              
+              <div className="mob-table">
               <ReactTable
                 data={data}
                 columns={mobColumns}
@@ -164,6 +184,7 @@ class History extends Component {
                 showPaginationBottom = {false}
                 defaultFilterMethod={funcs.customFilter}
               />
+              </div>
               </Breakpoint>
               </div>
         )

@@ -125,46 +125,74 @@ class FaveTable extends Component {
           this.removeFavourite(props.original.player_id)}>*</Button>
         )
       },
+      maxWidth:30,
+    },
+
+
+      
+    {
+      Header:'Pos',
+      accessor: 'current_position',
+      maxWidth: 35,
+      style:{
+        textAlign:"center",
+      
+        
+      }
+
+  },
+      {
+      Header: '',
+      accessor: 'player_bio.short_name',
+      maxWidth: 20,
+      
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'player_bio.last_name',
+      maxWidth:75,
+      filterable: true,
+      style:{
+        textAlign:"left"
+
+      },
+      
+    },
+    {
+      Header: 'Tru',
+      accessor: 'thru',
+      filterable: false,
+      maxWidth:35,
+    },
+    
+    {
+      Header: 'Tot',
+      accessor: 'total',
+      maxWidth: 35,
+      filterable: true,
+      style:{
+        textAlign:"center"
+      }
+    },
+
+    {
+      Header: 'Rank',
+      
+      accessor: 'rankings.cup_rank',
       maxWidth:50,
+      style:{
+        textAlign:"center",
+      
+      
+      }
     },
-
-
-      
-        {
-        Header:'Pos',
-        accessor: 'current_position',
-        maxWidth:50,
-        style:{
-          textAlign:"center"
-        }
-
-    },
-        {
-        Header: 'First Name',
-        accessor: 'player_bio.short_name',
-        maxWidth:50,
-        filterable: true
-      },
-      {
-        Header: 'Last Name',
-        accessor: 'player_bio.last_name',
-        filterable: true
-      },
-      {
-        Header: 'Thru',
-        accessor: 'thru',
-        filterable: false
-      },
-      
-      
-      {
-        Header: 'Total',
-        accessor: 'total',
-        maxWidth:50,
-        style:{
-          textAlign:"center"
-        }
-      },
+    {Header:'Proj',
+    accessor:'rankings.projected_cup_rank',
+    maxWidth:50,
+    style:{
+      textAlign:"center"
+    }
+  },
       
     ]
 
@@ -238,6 +266,20 @@ class FaveTable extends Component {
           textAlign:"center"
         }
       },
+      {
+        Header: 'Cup Rank',
+        accessor: 'rankings.cup_rank',
+        style:{
+          textAlign:"center"
+        }
+      },
+      {Header:'Proj Rank',
+      accessor:'rankings.projected_cup_rank',
+      style:{
+        textAlign:"center"
+      }
+    },
+      
       
     ]
   
@@ -259,6 +301,7 @@ class FaveTable extends Component {
               />
               </Breakpoint>
               <Breakpoint l down>
+              <div className="mob-table">
               <ReactTable
                 data={data}
                 columns={mobColumns}
@@ -270,6 +313,7 @@ class FaveTable extends Component {
                 showPaginationBottom = {false}
                 defaultFilterMethod={funcs.customFilter}
               />
+              </div>
               </Breakpoint>
               <Tabletest/>
           </div>      
