@@ -26,7 +26,9 @@ const initialState = {
     isStartedHistory:"",
     roundStateHistory:"",
     tourIdHistory:"",
-    coursesHistory:[]
+    coursesHistory:[],
+    euro:[],
+    eplayers:[]
   }
   
   const reducer = (state = initialState, action) => {
@@ -88,6 +90,12 @@ const initialState = {
           coursesHistory:action.courses
           
           
+        }
+        case actionTypes.EURO_FETCHED:
+        return {
+          ...state,
+          euro:action.euro,
+          eplayers:action.eplayers,
         }
 
 
