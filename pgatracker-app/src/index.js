@@ -23,6 +23,7 @@ import Userpage from './components/Userpage'
 import requireAuth from './components/requireAuth'
 import FaveTable from './components/FaveTable';
 import Schedule from './components/Schedule'
+import EuroTour from './components/Eurotour'
 import LandingPage from './components/LandingPage';
 import History from  './components/History'
 import Breakpoint, { BreakpointProvider } from 'react-socks';
@@ -52,7 +53,7 @@ ReactDOM.render(
     <BaseLayout>
       <Switch>
         <Route path="/" exact component={LandingPage} />
-        
+        <Route path="/euro-tour" component ={EuroTour}/>
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/golf" component={Golf} />
