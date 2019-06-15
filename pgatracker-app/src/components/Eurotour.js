@@ -18,6 +18,18 @@ class EuroTour extends Component {
 
     componentDidMount(){
         this.getEuroTour()
+
+        this.interval = setInterval(()=>{
+            //gonna fire this when status of game is active 
+           //console.log("how do i set the interval")
+  
+           
+            this.getEuroTour()
+          
+  
+         },300000)
+
+
     }
 
     getEuroTour=()=>{
