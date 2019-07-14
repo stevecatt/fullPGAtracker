@@ -12,6 +12,8 @@ import * as funcs from '../utils/dataFunctions'
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 import { setDefaultBreakpoints } from 'react-socks';
 import {Button} from "reactstrap"
+import cheerio from "cheerio"
+import request from 'request'
 
 
 class EuroTour extends Component {
@@ -43,6 +45,21 @@ class EuroTour extends Component {
 
 
     }
+
+    getCheerios =()=>{
+      let euromobile= "https://app.europeantour.com"
+      request ({
+        method: 'GET',
+        url: euromobile
+      },(err,res,body)=>{
+        if (err){
+          console.log(err);
+          // let $ =cheerio.load(body);
+          // let tournament=$(".container")
+          console.log(body)
+        }
+      })
+    }
     render(){
         const data = this.props.eplayers
 
@@ -51,19 +68,22 @@ class EuroTour extends Component {
   
             
             {
-              Header:'Nationality',
+              Header:'Nat',
               accessor: 'Country',
               filterable: true,
+              maxWidth:50,
               style:{
                 textAlign:"center",
                 
               }
+              
       
           },
     
               {
-              Header:'Position',
+              Header:'Pos',
               accessor: 'CurrentPosition',
+              maxWidth:35,
               style:{
                 textAlign:"center"
               }
@@ -77,24 +97,27 @@ class EuroTour extends Component {
             },
             
             {
-              Header:'Today',
+              Header:'Tod',
               accessor:'Today',
               soratble: false,
+              maxWidth:35,
               style:{
                 textAlign:"center"
               }
              
             },
             {
-              Header:'Through',
+              Header:'Thr',
               accessor:'After',
+              maxWidth:35,
               style:{
                 textAlign:"center"
               }
             },
             {
-              Header: 'Total',
+              Header: 'Tot',
               accessor: 'Total',
+              maxWidth:35,
               style:{
                 textAlign:"center"
               }
@@ -111,6 +134,7 @@ class EuroTour extends Component {
             <div className="container">
             <h1>European Tour</h1>
             <h4>{this.props.etournament}</h4>
+            <div className="mob-table">
             <ReactTable 
             data={data}
             columns={fullColumns}
@@ -120,6 +144,7 @@ class EuroTour extends Component {
             showPaginationBottom = {false}
             defaultFilterMethod={funcs.customFilter}
           />
+          </div>
           </div>
         )
     }
