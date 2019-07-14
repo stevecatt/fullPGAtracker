@@ -54,11 +54,12 @@ class Menu extends Component {
         return(
           <div className="container">
         <Navbar  light style={{color:'#076652'}} expand="md">
-          <NavbarBrand style={{color:'#076652'}} tag={RRNavLink} to="/"> Home</NavbarBrand>
+          <NavbarBrand style={{color:'#076652'}} tag={RRNavLink} to="/"> PGA </NavbarBrand>
+          <NavbarBrand style={{color:'blue'}} tag={RRNavLink} to="/euro-tour">European</NavbarBrand>
           <NavbarToggler style={{color:'#076652'}} onClick={this.toggle} />
           <Collapse style={{color:'#076652'}} isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-            <NavItem><NavLink style={{color:'#076652'}} tag={RRNavLink} className="font-weight-bold topbar" to="/euro-tour"> European </NavLink></NavItem>
+            
             <NavItem><NavLink style={{color:'#076652'}} tag={RRNavLink} className="font-weight-bold topbar" to="/schedule"> Schedule </NavLink></NavItem>
               <NavItem>
               {this.props.isAuth ?  <NavLink style={{color:'#076652'}} tag={RRNavLink} className="font-weight-bold topbar"to="/userpage"> Favorites </NavLink>:null}
